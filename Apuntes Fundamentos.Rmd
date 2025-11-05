@@ -1,0 +1,23 @@
+---
+title: "Apuntes Fundamentos"
+author: "Javier Plaza Rosique"
+output:
+  pdf_document:
+    latex_engine: xelatex
+    toc: true
+    number_sections: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE, # Muestra el codigo del chunk.  
+  results = "markup", # Función por defecto, pero por si acaso se pone. Significa que se pone la ejecución de cada chunk justamente debajo. Por ejemplo si se realiza un plot de un gráfico, se muestra debajo del código.
+  message = FALSE, # Oculta los mensajes que pueden aparecer por defecto en cada libreria.
+  warning = FALSE # Oculata las advertencias.
+)
+```
+
+```{python}
+print("Hola Mundo")
+```
+
