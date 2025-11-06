@@ -6,6 +6,7 @@ output:
     latex_engine: xelatex
     toc: true
     number_sections: true
+    lang: es 
 ---
 
 ```{r setup, include=FALSE}
@@ -17,7 +18,20 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{python}
-print("Hola Mundo")
+# Git 
+
+**Git** es un sistema de control de versiones. Sirve para guardar el historial de cambios de los archivos de un proyecto, y también sirve para poder coordinar el trabajo entre varias personas sin que unos se pisen a otros.
+
+El funcionamiento de Git es el siguiente: 
+
+```{r echo=FALSE}
+library(DiagrammeR)
+library(DiagrammeRsvg)
+library(rsvg)
+
+funcionamientoGit <- "digraph {
+  rankdir = TB
+}"
 ```
+
 
