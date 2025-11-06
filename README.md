@@ -1,1 +1,1 @@
-En este repositorio se encontraran los apuntes para la parte de Fundamentos del Master en Big Data & Cloud de EDEM Escuela de Empresarios. 
+En este repositorio se encontrara un documento donde se encuentran las herramientas básicas para dedicarse al mundo de los datos, aunque principalmente para la ingenieria de datos. 
