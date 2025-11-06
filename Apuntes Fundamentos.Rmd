@@ -24,3 +24,14 @@ knitr::opts_chunk$set(
 
 El funcionamiento de Git es el siguiente: 
 
+```{r echo=FALSE}
+library(DiagrammeR)
+library(DiagrammeRsvg)
+library(rsvg)
+
+funcionamientoGit <- "digraph {
+  rankdir = TB
+}"
+```
+
+
