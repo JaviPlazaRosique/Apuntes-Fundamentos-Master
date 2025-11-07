@@ -211,6 +211,62 @@ En el caso contrario se utilizará el siguiente comando, y esto se realizará un
 git clone <URL del repositorio remoto>
 ```
 
+**¿Cuál es la situación?**
+
+Para contestar a esta pregunta, existe un comando. Dicho comando nos muestra tres cosas:
+
+- En que rama nos encontramos.
+- Los archivos que han sido modificados.
+- De los archivos que han sido modificados, cuales están preparados para hacer un commit. 
+
+El comando descrito es el siguiente: 
+
+```{bash eval=FALSE}
+git status
+```
+
+**¿Cómo le cominicamos a Git que un archivo está preparado para hacer el commit?**
+
+Para comunicarle a Git que archivos están listos para ser commiteados, antes se le tiene que dar a guardar (si está guardado, git sabe que se ha modificado) y emplear el siguiente comando: 
+
+```{bash eval=FALSE}
+git add <Nombre del archivo>
+```
+
+**Commit.**
+
+Ya sabiendo lo que es un commit, el comando que hará uno con los archivos que anteriormente se hayan añadido es el siguiente: 
+
+```{bash eval=FALSE}
+git commit -m "Título del commit"
+
+# -m se pone para poner un mensaje, en este caso es el título del commit
+```
+
+**Push.**
+
+Ya sabiendo lo que es un push, para hacer uno con los nuevos commits, se debe de utilizar el siguiente comando: 
+
+```{bash eval=FALSE}
+git push origin <Nombre de la rama a la que queremos hacer el push>
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
