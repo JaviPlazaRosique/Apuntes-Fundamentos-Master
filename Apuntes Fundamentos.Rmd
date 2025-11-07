@@ -6,7 +6,7 @@ output:
     latex_engine: xelatex
     toc: true
     number_sections: true
-    lang: es 
+lang: es 
 ---
 
 ```{r setup, include=FALSE}
@@ -44,12 +44,43 @@ El funcionamiento de Git es el siguiente:
 
 ```{r echo=FALSE}
 library(DiagrammeR)
-library(DiagrammeRsvg)
-library(rsvg)
 
 funcionamientoGit <- "digraph {
   rankdir = TB
+  graph [ranksep=1, nodesep=1, splines=true]
+  node  [shape=box, style=\"rounded,filled\", color=\"#444\", fontsize=14]
+  edge  [color=\"#555\", fontcolor=\"#222\", arrowsize=0.5]
+  
+  RR [label=\"Repositorio remoto (Servidor)\", fillcolor=\"#F5A623\"]
+  RL1 [label=\"Repositorio local\", fillcolor=\"#11B5C3\"]
+  RL2 [label=\"Repositorio local\", fillcolor=\"#11B5C3\"]
+  RL3 [label=\"Repositorio local\", fillcolor=\"#11B5C3\"]
+  CT1 [label=\"Equipo 2\", fillcolor=\"#67B32E\"]
+  CT2 [label=\"Equipo 3\", fillcolor=\"#67B32E\"]
+  CT3 [label=\"Equipo 4\", fillcolor=\"#67B32E\"]
+  
+  RR -> RL1 [label=\"Pull\", penwidth=1.5, style=dashed, color=\"#C62828\"]
+  RR -> RL2 [label=\"Pull\", penwidth=1.5, style=dashed, color=\"#C62828\"]
+  RR -> RL3 [label=\"Pull\", penwidth=1.5, style=dashed, color=\"#C62828\"]
+  
+  RL1 -> RR [label=\"Push\", penwidth=1.5, color=\"#2E7D32\"]
+  RL2 -> RR [label=\"Push\", penwidth=1.5, color=\"#2E7D32\"]
+  RL3 -> RR [label=\"Push\", penwidth=1.5, color=\"#2E7D32\"]
+  
+  RL1 -> CT1 [label=\"Update\", penwidth=1.5, style=dashed, color=\"#C62828\"]
+  RL2 -> CT2 [label=\"Update\", penwidth=1.5, style=dashed, color=\"#C62828\"]
+  RL3 -> CT3 [label=\"Update\", penwidth=1.5, style=dashed, color=\"#C62828\"]
+  
+  CT1 -> RL1 [label=\"Commit\", penwidth=1.5, color=\"#2E7D32\"]
+  CT2 -> RL2 [label=\"Commit\", penwidth=1.5, color=\"#2E7D32\"]
+  CT3 -> RL3 [label=\"Commit\", penwidth=1.5, color=\"#2E7D32\"]
 }"
+
+funGit <- DiagrammeR::grViz(funcionamientoGit)
+funGit_image <- DiagrammeRsvg::export_svg(funGit)
+rsvg::rsvg_png(charToRaw(funGit_image), file = "funcionamientoGit.png", width = 1600)
 ```
 
-
+```{r, echo=FALSE, out.width="100%", fig.align='center'}
+knitr::include_graphics("funcionamientoGit.png")
+```
