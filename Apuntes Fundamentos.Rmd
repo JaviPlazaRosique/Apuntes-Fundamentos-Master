@@ -328,14 +328,50 @@ La parte más atractiva de GitHub, a la hora de compartir proyectos o de realiza
 
 Para entender el funcionamiento de las Pull Request, es más sencillo con la siguiente imagen. 
 
+```{r echo=FALSE}
+PR <- "digraph {
+  rankdir = TB
+  graph [bgcolor=transparent, nodesep=0.3, ranksep=0.5]
+  node  [shape=circle, fontsize=9, color=black]
+  
+  m1 [label=\"\", fillcolor=black, style=filled, fixedsize=true, width=0.25]
+  m2 [label=\"\", fillcolor=black, style=filled, fixedsize=true, width=0.25]
+  m3 [label=\"\", fillcolor=black, style=filled, fixedsize=true, width=0.25]
+  m4 [label=\"\", fillcolor=black, style=filled, fixedsize=true, width=0.25]
+  m5 [label=\"\", fillcolor=black, style=filled, fixedsize=true, width=0.25]
+  m6 [label=\"\", fillcolor=black, style=filled, fixedsize=true, width=0.25]
+  
+  r11 [label=\"\", fillcolor=\"#2E7D32\", style=filled, fixedsize=true, width=0.25]
+  r12 [label=\"\", fillcolor=\"#2E7D32\", style=filled, fixedsize=true, width=0.25]
+  r13 [label=\"Pull Request aceptada\", color=black, fillcolor=\"#2E7D32\", style=filled, shape=ellipse, fontcolor=white, fontsize=9]
+  
+  r21 [label=\"\", fillcolor=\"#C62828\", style=filled, fixedsize=true, width=0.25]
+  r22 [label=\"Pull Request rechazada\", color=black, fillcolor=\"#C62828\", style=filled, shape=ellipse, fontcolor=white, fontsize=9]
+  r23 [label=\"Pull Request aceptada tras cambios por el feedback\", color=black, fillcolor=\"#C62828\", style=filled, shape=ellipse, fontcolor=white, fontsize=9]
+  
+  m1 -> m2 -> m3 -> m4 -> m5 -> m6 [color=black, penwidth=2]
+  
+  m2 -> r11 -> r12 -> r13 -> m5 [color=\"#2E7D32\", penwidth=2, weight=1, splines=true]
 
+  m3 -> r21 -> r22 -> r23 -> m6 [color=\"#C62828\", penwidth=2, weight=1, splines=true]
+  
+  main [shape=none, label=\"Main\", fontcolor=black, fontsize=10]
+  rama1 [shape=none, label=\"Branch 1\", fontcolor=\"#2E7D32\", fontsize=10]
+  rama2 [shape=none, label=\"Branch 2\", fontcolor=\"#C62828\", fontsize=10]
+  
+  m6  -> main  [style=invis]  
+  r13 -> rama1   [style=invis]   
+  r23 -> rama2   [style=invis]
+}"
 
+PullR <- DiagrammeR::grViz(PR)
+PR_image <- DiagrammeRsvg::export_svg(PullR)
+rsvg::rsvg_png(charToRaw(PR_image), file = "PullRequest.png", width = 1600)
+```
 
-
-
-
-
-
+```{r, echo=FALSE, out.width="100%", fig.align='center'}
+knitr::include_graphics("PullRequest.png")
+```
 
 
 
