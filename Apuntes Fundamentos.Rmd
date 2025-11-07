@@ -107,6 +107,12 @@ rsvg::rsvg_png(charToRaw(funGit_image), file = "funcionamientoGit.png", width = 
 knitr::include_graphics("funcionamientoGit.png")
 ```
 
+Además de lo explicado anteriormente, Git también permite realizar ramificaciones. Una rama es una línea de desarrollo independiente, que permite realizar cambios y probar nuevas cosas sin afectar a la rama principal. También permite trabajar en conjunto con un equipo, teniendo cada uno su rama. Las ramas pueden nacer de la rama principal, que por convención se llama "main" (anteriormente "master"), pero también pueden nacer de otras ramas. Cuando se termina el trabajo en una rama, se une (merge) a la rama de la que salió, pasando a la misma todos los commits realizados en la rama. Al realizar la unión entre ramas pueden ocurrir conflictos si se trabaja en las dos ramas implicadas. 
+
+**Importante**. Es recomendable nunca trabajar en la rama principal.
+
+A continuación se puede observar una imagen donde se ve visualmente el funcionamiento de las ramas en Git.
+
 ```{r echo=FALSE}
 ramasGit <- "digraph {
   rankdir = LR
@@ -126,19 +132,25 @@ ramasGit <- "digraph {
   r21 [label=\"\", color=black, fillcolor=\"#C62828\", style=filled]
   r22 [label=\"\", color=black, fillcolor=\"#C62828\", style=filled]
   
+  r31 [label=\"\", color=black, fillcolor=\"#11B5C3\", style=filled]
+  
   m1 -> m2 -> m3 -> m4 -> m5 [color=black, penwidth=2]
   
   m2 -> r11 -> r12 -> r13 -> m5 [color=\"#2E7D32\", penwidth=2, weight=1, splines=true]
   
   m3 -> r21 -> r22 [color=\"#C62828\", penwidth=2, weight=1, splines=true]
+
+  r22 -> r31 [color=\"#11B5C3\", penwidth=2, weight=1, splines=true]
   
   main [shape=none, label=\"Main\", fontcolor=black, fontsize=10]
   rama1 [shape=none, label=\"Branch 1\", fontcolor=\"#2E7D32\", fontsize=10]
   rama2 [shape=none, label=\"Branch 2\", fontcolor=\"#C62828\", fontsize=10]
+  rama3 [shape=none, label=\"Branch 3\", fontcolor=\"#11B5C3\", fontsize=10]
   
   m5  -> main  [style=invis]  
   r13 -> rama1   [style=invis]   
   r22-> rama2 [style=invis]
+  r31-> rama3 [style=invis]
 }"
 
 ramGit <- DiagrammeR::grViz(ramasGit)
@@ -146,9 +158,17 @@ ramGit_image <- DiagrammeRsvg::export_svg(ramGit)
 rsvg::rsvg_png(charToRaw(ramGit_image), file = "ramasGit.png", width = 1600)
 ```
 
-```{r, echo=FALSE, out.width="100%", fig.align='center'}
+```{r, echo=FALSE, out.width="95%", fig.align='center'}
 knitr::include_graphics("ramasGit.png")
 ```
+
+Dentro de un repositorio de Git, se pueden crear una serie de archivos con funcionalidades especificas. Dichos archivos son el archivo llamado ".gitignore" y el archivo llamado ".gitkeep". Las funciones de cada archivo son las siguientes:
+
+- **.gitkeep**. El archivo permite crear una carpera dentro del repositorio de git, sin la necesidad de tener que crear un archivo con contenido. Se emplea cuando se quiere crear la estructura del repositorio (carpetas), y aun no se quiere empezar a trabajar en el. 
+
+- **.gitignore**. El archivo sirve para excluir algunos archivos, por el motivo que sea. Al excluirlos, no los elimina, pero si que no los ratrea ni incluye en los commits. Los motivos para excluir algunos archivos pueden ser variados, pero los más comunes son por las vulnerabilidades que se pueden causar (contraseñas o similar) o por el tamaño de los archivos. 
+
+
 
 
 
