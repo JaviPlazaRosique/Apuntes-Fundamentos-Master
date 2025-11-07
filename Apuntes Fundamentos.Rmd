@@ -6,7 +6,7 @@ output:
     latex_engine: xelatex
     toc: true
     number_sections: true
-    lang: es 
+lang: es 
 ---
 
 ```{r setup, include=FALSE}
@@ -18,11 +18,53 @@ knitr::opts_chunk$set(
 )
 ```
 
-# Git 
+\newpage
+
+# Introducción 
+
+En este documento, se podrán encontrar los conocimientos básicos sobre las siguientes herramientas:
+
+- Git, y como server online del mismo GitHub.
+- Linux.
+- Python.
+- Docker.
+- SQL.
+
+El objetivo final para mi es llegar a comprender los fundamentos de las herramientas anteriormente mencionadas. Aunque este documento lo publico por si hay alguna persona a la que le pueda llegar a ayudar. 
+
+Los conocimientos con los que ha sido redactado este documento son los adquiridos durante el módulo de Fundamentos del Master en Big Data que me encuentro en la actualidad cursando. 
+
+Cabe recalcar que ni mucho menos lo que esta en el presente documento es todo lo que se puede llegar a saber sobre las herramientas anteriormente mencionadas.
+
+\newpage 
+
+# Git.
 
 **Git** es un sistema de control de versiones. Sirve para guardar el historial de cambios de los archivos de un proyecto, y también sirve para poder coordinar el trabajo entre varias personas sin que unos se pisen a otros.
 
-El funcionamiento de Git es el siguiente: 
+## Bases de Git.
+
+Para entender el funcionamiento de Git, antes hay que tener varios conceptos claros. Los conceptos son los siguientes:
+
+- Repositorio.
+- Flujo de trabajo con Git: commit, update, push, pull.
+
+Un **repositorio** de Git es una carpeta (como cualquier carpeta del ordenador), en donde se encuentra un subdirectorio (como un archivo) oculto llamado .git, en el cual se guardan los datos de las versiones de los cambios producidos dentro del repositorio. Al poder llegar a tener el subdirectorio descargado en el ordenador, no es necesario tener conexion a internet, pues todos los cambios se encuentran el subdirectorio, por lo que podremos realizar cualquier acción. El repositorio se puede encontrar en local (una capeta del ordenador) o en remoto. Los repositorios en remoto son copias de los repositorios alojados en servidores externos o en la nube, esto permite realizar el trabajo en equipo. Uno de los servicios de repositorios en remoto más extendido es GitHub, pero también se pueden encontrar otros como GitLab.
+
+**Commit** es la acción que realizamos cada vez que realicemos cambios en el proyecto, y queramos guardarlos. En otras palabras un commit es una instantanea del proyecto a la hora de hacerlo. Dichos cambios se guardan en el repositorio local, es decir, en el ordenador. Las características que todo commit tiene son las siguientes: 
+
+- Título.
+- Descripción.
+- Hash. Un hash es un código único, el cual es único por cada commit.
+- Hora.
+
+**Update**, en español actualizar, es llevar al espacio de trabajo la información existente en el repositorio local. 
+
+La acción **Push** envia los commits que se encuentran en el repositorio local (los nuevos, no los que ya están en remoto) al repositorio remoto. Con esta acción pueden surgir conflictos, es decir, cuando se intenta escribir por ejemplo en una línea ene la qeu ya había información. La solución del conflicto no la realiza ni Git, ni GitHub, dará error. Será la misma persona que realize el push u otra persona la que decide que hacer con el conflicto.
+
+**Pull** es el update entre repositorios, es decir, que lleva al repositorio local la información recogida en el repositorio remoto. Al igual que en el push, también pueden surgir conflictos. En este caso los conflictos son más complicados que aparezcan, pues se supone que si alguien va a trabajar sobre un proyecto ya empezado, antes se bajará el proyecto al ordenador. 
+
+A continuación se encuentra una imagen, que refleja el flujo de trabajo con Git, con lo explicado anteriormente. 
 
 ```{r echo=FALSE}
 library(DiagrammeR)
@@ -31,7 +73,312 @@ library(rsvg)
 
 funcionamientoGit <- "digraph {
   rankdir = TB
+  graph [ranksep=1, nodesep=1, splines=true]
+  node  [shape=box, style=\"rounded,filled\", color=\"#444\", fontsize=14]
+  edge  [color=\"#555\", fontcolor=\"#222\", arrowsize=0.5]
+  
+  RR [label=\"Repositorio remoto (Servidor)\", fillcolor=\"#F5A623\"]
+  RL1 [label=\"Repositorio local\", fillcolor=\"#11B5C3\"]
+  RL2 [label=\"Repositorio local\", fillcolor=\"#11B5C3\"]
+  RL3 [label=\"Repositorio local\", fillcolor=\"#11B5C3\"]
+  CT1 [label=\"Copia de trabajo\", fillcolor=\"#67B32E\"]
+  CT2 [label=\"Copia de trabajo\", fillcolor=\"#67B32E\"]
+  CT3 [label=\"Copia de trabajo\", fillcolor=\"#67B32E\"]
+  
+  RR -> RL1 [label=\"Pull\", penwidth=1.5, style=dashed, color=\"#C62828\"]
+  RR -> RL2 [label=\"Pull\", penwidth=1.5, style=dashed, color=\"#C62828\"]
+  RR -> RL3 [label=\"Pull\", penwidth=1.5, style=dashed, color=\"#C62828\"]
+  
+  RL1 -> RR [label=\"Push\", penwidth=1.5, color=\"#2E7D32\"]
+  RL2 -> RR [label=\"Push\", penwidth=1.5, color=\"#2E7D32\"]
+  RL3 -> RR [label=\"Push\", penwidth=1.5, color=\"#2E7D32\"]
+  
+  RL1 -> CT1 [label=\"Update\", penwidth=1.5, style=dashed, color=\"#C62828\"]
+  RL2 -> CT2 [label=\"Update\", penwidth=1.5, style=dashed, color=\"#C62828\"]
+  RL3 -> CT3 [label=\"Update\", penwidth=1.5, style=dashed, color=\"#C62828\"]
+  
+  CT1 -> RL1 [label=\"Commit\", penwidth=1.5, color=\"#2E7D32\"]
+  CT2 -> RL2 [label=\"Commit\", penwidth=1.5, color=\"#2E7D32\"]
+  CT3 -> RL3 [label=\"Commit\", penwidth=1.5, color=\"#2E7D32\"]
 }"
+
+funGit <- DiagrammeR::grViz(funcionamientoGit)
+funGit_image <- DiagrammeRsvg::export_svg(funGit)
+rsvg::rsvg_png(charToRaw(funGit_image), file = "funcionamientoGit.png", width = 1600)
 ```
+
+```{r, echo=FALSE, out.width="100%", fig.align='center'}
+knitr::include_graphics("funcionamientoGit.png")
+```
+
+Además de lo explicado anteriormente, Git también permite realizar ramificaciones. Una rama es una línea de desarrollo independiente, que permite realizar cambios y probar nuevas cosas sin afectar a la rama principal. También permite trabajar en conjunto con un equipo, teniendo cada uno su rama. Las ramas pueden nacer de la rama principal, que por convención se llama "main" (anteriormente "master"), pero también pueden nacer de otras ramas. Cuando se termina el trabajo en una rama, se une (merge) a la rama de la que salió, pasando a la misma todos los commits realizados en la rama. Al realizar la unión entre ramas pueden ocurrir conflictos si se trabaja en las dos ramas implicadas. 
+
+**Importante**. Es recomendable nunca trabajar en la rama principal.
+
+A continuación se puede observar una imagen donde se ve visualmente el funcionamiento de las ramas en Git.
+
+```{r echo=FALSE}
+ramasGit <- "digraph {
+  rankdir = LR
+  graph [bgcolor=transparent, nodesep=0.3, ranksep=0.5]
+  node  [shape=circle, width=0.25, fixedsize=true, fontsize=9, color=black]
+  
+  m1 [label=\"\", color=black, fillcolor=black, style=filled]
+  m2 [label=\"\", color=black, fillcolor=black, style=filled]
+  m3 [label=\"\", color=black, fillcolor=black, style=filled]
+  m4 [label=\"\", color=black, fillcolor=black, style=filled]
+  m5 [label=\"\", color=black, fillcolor=black, style=filled]
+  
+  r11 [label=\"\", color=black, fillcolor=\"#2E7D32\", style=filled]
+  r12 [label=\"\", color=black, fillcolor=\"#2E7D32\", style=filled]
+  r13 [label=\"\", color=black, fillcolor=\"#2E7D32\", style=filled]
+  
+  r21 [label=\"\", color=black, fillcolor=\"#C62828\", style=filled]
+  r22 [label=\"\", color=black, fillcolor=\"#C62828\", style=filled]
+  
+  r31 [label=\"\", color=black, fillcolor=\"#11B5C3\", style=filled]
+  
+  m1 -> m2 -> m3 -> m4 -> m5 [color=black, penwidth=2]
+  
+  m2 -> r11 -> r12 -> r13 -> m5 [color=\"#2E7D32\", penwidth=2, weight=1, splines=true]
+  
+  m3 -> r21 -> r22 [color=\"#C62828\", penwidth=2, weight=1, splines=true]
+
+  r22 -> r31 [color=\"#11B5C3\", penwidth=2, weight=1, splines=true]
+  
+  main [shape=none, label=\"Main\", fontcolor=black, fontsize=10]
+  rama1 [shape=none, label=\"Branch 1\", fontcolor=\"#2E7D32\", fontsize=10]
+  rama2 [shape=none, label=\"Branch 2\", fontcolor=\"#C62828\", fontsize=10]
+  rama3 [shape=none, label=\"Branch 3\", fontcolor=\"#11B5C3\", fontsize=10]
+  
+  m5  -> main  [style=invis]  
+  r13 -> rama1   [style=invis]   
+  r22-> rama2 [style=invis]
+  r31-> rama3 [style=invis]
+}"
+
+ramGit <- DiagrammeR::grViz(ramasGit)
+ramGit_image <- DiagrammeRsvg::export_svg(ramGit)
+rsvg::rsvg_png(charToRaw(ramGit_image), file = "ramasGit.png", width = 1600)
+```
+
+```{r, echo=FALSE, out.width="100%", fig.align='center'}
+knitr::include_graphics("ramasGit.png")
+```
+
+Dentro de un repositorio de Git, se pueden crear una serie de archivos con funcionalidades especificas. Dichos archivos son el archivo llamado ".gitignore" y el archivo llamado ".gitkeep". Las funciones de cada archivo son las siguientes:
+
+- **.gitkeep**. El archivo permite crear una carpera dentro del repositorio de git, sin la necesidad de tener que crear un archivo con contenido. Se emplea cuando se quiere crear la estructura del repositorio (carpetas), y aun no se quiere empezar a trabajar en el. 
+
+- **.gitignore**. El archivo sirve para excluir algunos archivos, por el motivo que sea. Al excluirlos, no los elimina, pero si que no los ratrea ni incluye en los commits. Los motivos para excluir algunos archivos pueden ser variados, pero los más comunes son por las vulnerabilidades que se pueden causar (contraseñas o similar) o por el tamaño de los archivos. 
+
+Las acciones que permite hacer Git como los commits, los push y los demás, se pueden hacer mediante interfaces simples, como puede ser el ejemplo de GitHub, el cual trabaja a partir de GitHub Desktop (luego se verá). Pero para poder trabajar sin una interfaz u en una interfaz que no "tengamos controlada", también se puede trabajar por comandos desde el bash.
+
+De manera sencilla bash es un interprete de comandos del sistema, que nos permite realizar acciones como crear capetas, movernos por el ordenador (todo esto se verá en la parte de Linux), pero también permite tabajar con varias herramientas entre las cuales está Git. Según el sistema operativo del ordenador se puede usar el bash de manera diferente. Desde MacOS y Linux, viene por defecto en la terminal, y en Windows se puede emplear desde GitBash, el cual se instala junto a Git.
+
+## Comandos Git.
+
+Los comandos más importantes para usar Git son los siguientes:
+
+**Creación del repositorio.**
+
+Si se quiere crear el repositorio en el directorio actual, es decir, si la carpeta en la que estamos situados queremos convertirla en un repositorio.
+
+```{bash eval=FALSE}
+git init 
+```
+
+En el caso de que queramos crear un repositorio de cero, se puede usar lo siguiente. Esto crea el repositorio (carpeta) con el nombre que se escriba en "<directorio>". Para que se entienda, si estamos en una carpeta del ordenador, crea una carpeta dentro de ella con el nombre introducido, siendo esta el repositorio.
+
+```{bash eval=FALSE}
+git init <directorio>
+```
+
+**Conexión del repositorio local con el repositorio remoto.**
+
+En el caso de conectar un repositorio local con un repositorio remoto, se puede hacer en ambas vías. Es decir que se puede conectar un repositorio local con contenido a un repositorio remoto vacío (creado) o se puede conectar un repositorio remoto al ordenador creando así un repositorio local con el contenido existente en el repositorio remoto.
+
+Para conectar un repo local con uno remoto, antes tenemos que crear un repositorio remoto. Dicho repo se quedará vacío, ya que va a tener los archivos del repo local al conectarlos. Para hacer esto se escribe el siguiente comando en el bash:
+
+```{bash eval=FALSE}
+git remote add origin <URL del repositorio remoto>
+
+# origin es el nombre por el que git identifica al repo remoto, se usa ese nombre
+# por convención.
+```
+
+En el caso contrario se utilizará el siguiente comando, y esto se realizará unicamente la primera vez que "bajemos" el repo.
+
+```{bash eval=FALSE}
+git clone <URL del repositorio remoto>
+```
+
+**¿Cuál es la situación?**
+
+Para contestar a esta pregunta, existe un comando. Dicho comando nos muestra tres cosas:
+
+- En que rama nos encontramos.
+- Los archivos que han sido modificados.
+- De los archivos que han sido modificados, cuales están preparados para hacer un commit. 
+
+El comando descrito es el siguiente: 
+
+```{bash eval=FALSE}
+git status
+```
+
+**¿Cómo le cominicamos a Git que un archivo está preparado para hacer el commit?**
+
+Para comunicarle a Git que archivos están listos para ser commiteados, antes se le tiene que dar a guardar (si está guardado, git sabe que se ha modificado) y emplear el siguiente comando: 
+
+```{bash eval=FALSE}
+git add <Nombre del archivo>
+```
+
+**Commit.**
+
+Ya sabiendo lo que es un commit, el comando que hará uno con los archivos que anteriormente se hayan añadido es el siguiente: 
+
+```{bash eval=FALSE}
+git commit -m "Título del commit"
+
+# -m se pone para poner un mensaje, en este caso es el título del commit.
+```
+
+En el caso de que se haya realizado un commit, el cual es erroneo, se puede revertir empleando el siguiente comando: 
+
+```{bash eval=FALSE}
+git revert <Primera parte del hash>
+
+# Con primera parte del hash, se pueden emplear los caracteres que hagan único
+# el hash, deberían de bastar 6 o 7, pero se puede utilizar entero.
+
+git revert HEAD
+
+# HEAD significa el último commit realizado.
+```
+
+**¿Cómo puedo saber el hash de un commit?**
+
+Para poder saber el hash de un commit, se puede acceder al historial de cambios en el proyecto. Esto se hace mediante el siguiente comando:
+
+```{bash eval=FALSE}
+git log 
+```
+
+**Push.**
+
+Ya sabiendo lo que es un push, para hacer uno con los nuevos commits, se debe de utilizar el siguiente comando: 
+
+```{bash eval=FALSE}
+git push origin <Nombre de la rama a la que queremos hacer el push>
+```
+
+**Pull.**
+
+Ya sabiendo lo que es un pull, el comando que se debe emplear para hacer uno es el siguiente: 
+
+```{bash eval=FALSE}
+git push origin <Nombre de la rama a la que queremos hacer el pull>
+```
+
+
+**¿Cómo crear una rama?**
+
+Para crear una nueva rama, la cual se conecta a la rama en la que estamos situados, se utilizará el siguiente comando:
+
+```{bash eval=FALSE}
+git branch <Nombre que queremos ponerle a la rama>
+```
+
+**¿Cómo me puedo cambiar entre rama?**
+
+Para cambiar de una rama a otra, se debe de usar el siguiente comando:
+
+```{bash eval=FALSE}
+git switch <Nombre de la rama a la que queremos cambiar>
+```
+
+**¿Cómo puedo unir una rama con la rama de la que sale?**
+
+Para poder unir una rama con la rama de la que sale, primero debemos de encontrarnos en la rama de la que sale. Por ejemplo, si una ramma llamada "Rama 1" sale de main, para poder unir dicha rama con main, debemos de encontrarnos en main. Una vez estemos en la rama de la que sale, debemos de utilizar el siguiente comando: 
+
+```{bash eval=FALSE}
+git merge <Nombre de la rama que queremos unir>
+```
+
+**¿Cómo puedo eliminar una rama?**
+
+Para poder eliminar una rama, se debe de emplear el siguiente comando:
+
+```{bash eval=FALSE}
+git branch -d <Nombre de la rama que queremos eliminar>
+
+# -d se emplea cuando la rama ya está mergeada, si no lo está, no se podrá borrar
+
+# Para forzar la eliminación de la rama, se debe de cambiar -d por -D
+```
+
+## Servicio de repositorio remoto: GitHub.
+
+**GitHub** es una plataforma en la nube que permite guardar y compartir proyectos que usan Git.
+Sirve para colaborar en equipo, revisar código y mantener un historial de versiones online de tus repositorios.
+
+La parte más atractiva de GitHub, a la hora de compartir proyectos o de realizar tus propios proyectos son las Pull Request. Una Pull Request es una petición para que tus cambios se unan a la rama principal de un proyecto. Sirve para que otros revisen y aprueben tu código antes de fusionarlo.
+
+Para entender el funcionamiento de las Pull Request, es más sencillo con la siguiente imagen. 
+
+```{r echo=FALSE}
+PR <- "digraph {
+  rankdir = TB
+  graph [bgcolor=transparent, nodesep=0.3, ranksep=0.5]
+  node  [shape=circle, fontsize=9, color=black]
+  
+  m1 [label=\"\", fillcolor=black, style=filled, fixedsize=true, width=0.25]
+  m2 [label=\"\", fillcolor=black, style=filled, fixedsize=true, width=0.25]
+  m3 [label=\"\", fillcolor=black, style=filled, fixedsize=true, width=0.25]
+  m4 [label=\"\", fillcolor=black, style=filled, fixedsize=true, width=0.25]
+  m5 [label=\"\", fillcolor=black, style=filled, fixedsize=true, width=0.25]
+  m6 [label=\"\", fillcolor=black, style=filled, fixedsize=true, width=0.25]
+  
+  r11 [label=\"\", fillcolor=\"#2E7D32\", style=filled, fixedsize=true, width=0.25]
+  r12 [label=\"\", fillcolor=\"#2E7D32\", style=filled, fixedsize=true, width=0.25]
+  r13 [label=\"Pull Request aceptada\", color=black, fillcolor=\"#2E7D32\", style=filled, shape=ellipse, fontcolor=white, fontsize=9]
+  
+  r21 [label=\"\", fillcolor=\"#C62828\", style=filled, fixedsize=true, width=0.25]
+  r22 [label=\"Pull Request rechazada\", color=black, fillcolor=\"#C62828\", style=filled, shape=ellipse, fontcolor=white, fontsize=9]
+  r23 [label=\"Pull Request aceptada tras cambios por el feedback\", color=black, fillcolor=\"#C62828\", style=filled, shape=ellipse, fontcolor=white, fontsize=9]
+  
+  m1 -> m2 -> m3 -> m4 -> m5 -> m6 [color=black, penwidth=2]
+  
+  m2 -> r11 -> r12 -> r13 -> m5 [color=\"#2E7D32\", penwidth=2, weight=1, splines=true]
+
+  m3 -> r21 -> r22 -> r23 -> m6 [color=\"#C62828\", penwidth=2, weight=1, splines=true]
+  
+  main [shape=none, label=\"Main\", fontcolor=black, fontsize=10]
+  rama1 [shape=none, label=\"Branch 1\", fontcolor=\"#2E7D32\", fontsize=10]
+  rama2 [shape=none, label=\"Branch 2\", fontcolor=\"#C62828\", fontsize=10]
+  
+  m6  -> main  [style=invis]  
+  r13 -> rama1   [style=invis]   
+  r23 -> rama2   [style=invis]
+}"
+
+PullR <- DiagrammeR::grViz(PR)
+PR_image <- DiagrammeRsvg::export_svg(PullR)
+rsvg::rsvg_png(charToRaw(PR_image), file = "PullRequest.png", width = 1600)
+```
+
+```{r, echo=FALSE, out.width="100%", fig.align='center'}
+knitr::include_graphics("PullRequest.png")
+```
+
+
+
+
+
+
+
+
 
 
