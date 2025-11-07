@@ -40,10 +40,32 @@ Los conocimientos con los que ha sido redactado este documento son los adquirido
 
 **Git** es un sistema de control de versiones. Sirve para guardar el historial de cambios de los archivos de un proyecto, y también sirve para poder coordinar el trabajo entre varias personas sin que unos se pisen a otros.
 
-El funcionamiento de Git es el siguiente: 
+Para entender el funcionamiento de Git, antes hay que tener varios conceptos claros. Los conceptos son los siguientes:
+
+- Repositorio.
+- Flujo de trabajo con Git: commit, update, push, pull.
+
+Un **repositorio** de Git es una carpeta (como cualquier carpeta del ordenador), en donde se encuentra un subdirectorio (como un archivo) oculto llamado .git, en el cual se guardan los datos de las versiones de los cambios producidos dentro del repositorio. Al poder llegar a tener el subdirectorio descargado en el ordenador, no es necesario tener conexion a internet, pues todos los cambios se encuentran el subdirectorio, por lo que podremos realizar cualquier acción. El repositorio se puede encontrar en local (una capeta del ordenador) o en remoto. Los repositorios en remoto son copias de los repositorios alojados en servidores externos o en la nube, esto permite realizar el trabajo en equipo. Uno de los servicios de repositorios en remoto más extendido es GitHub, pero también se pueden encontrar otros como GitLab.
+
+**Commit** es la acción que realizamos cada vez que realicemos cambios en el proyecto, y queramos guardarlos. En otras palabras un commit es una instantanea del proyecto a la hora de hacerlo. Dichos cambios se guardan en el repositorio local, es decir, en el ordenador. Las características que todo commit tiene son las siguientes: 
+
+- Título.
+- Descripción.
+- Hash. Un hash es un código único, el cual es único por cada commit.
+- Hora.
+
+**Update**, en español actualizar, es llevar al espacio de trabajo la información existente en el repositorio local. 
+
+La acción **Push** envia los commits que se encuentran en el repositorio local (los nuevos, no los que ya están en remoto) al repositorio remoto. Con esta acción pueden surgir conflictos, es decir, cuando se intenta escribir por ejemplo en una línea ene la qeu ya había información. La solución del conflicto no la realiza ni Git, ni GitHub, dará error. Será la misma persona que realize el push u otra persona la que decide que hacer con el conflicto.
+
+**Pull** es el update entre repositorios, es decir, que lleva al repositorio local la información recogida en el repositorio remoto. Al igual que en el push, también pueden surgir conflictos. En este caso los conflictos son más complicados que aparezcan, pues se supone que si alguien va a trabajar sobre un proyecto ya empezado, antes se bajará el proyecto al ordenador. 
+
+A continuación se encuentra una imagen, que refleja el flujo de trabajo con Git, con lo explicado anteriormente. 
 
 ```{r echo=FALSE}
 library(DiagrammeR)
+library(DiagrammeRsvg)
+library(rsvg)
 
 funcionamientoGit <- "digraph {
   rankdir = TB
@@ -55,9 +77,9 @@ funcionamientoGit <- "digraph {
   RL1 [label=\"Repositorio local\", fillcolor=\"#11B5C3\"]
   RL2 [label=\"Repositorio local\", fillcolor=\"#11B5C3\"]
   RL3 [label=\"Repositorio local\", fillcolor=\"#11B5C3\"]
-  CT1 [label=\"Equipo 2\", fillcolor=\"#67B32E\"]
-  CT2 [label=\"Equipo 3\", fillcolor=\"#67B32E\"]
-  CT3 [label=\"Equipo 4\", fillcolor=\"#67B32E\"]
+  CT1 [label=\"Copia de trabajo\", fillcolor=\"#67B32E\"]
+  CT2 [label=\"Copia de trabajo\", fillcolor=\"#67B32E\"]
+  CT3 [label=\"Copia de trabajo\", fillcolor=\"#67B32E\"]
   
   RR -> RL1 [label=\"Pull\", penwidth=1.5, style=dashed, color=\"#C62828\"]
   RR -> RL2 [label=\"Pull\", penwidth=1.5, style=dashed, color=\"#C62828\"]
@@ -84,3 +106,58 @@ rsvg::rsvg_png(charToRaw(funGit_image), file = "funcionamientoGit.png", width = 
 ```{r, echo=FALSE, out.width="100%", fig.align='center'}
 knitr::include_graphics("funcionamientoGit.png")
 ```
+
+```{r echo=FALSE}
+ramasGit <- "digraph {
+  rankdir = LR
+  graph [bgcolor=transparent, nodesep=0.3, ranksep=0.5]
+  node  [shape=circle, width=0.25, fixedsize=true, fontsize=9, color=black]
+  
+  m1 [label=\"\", color=black, fillcolor=black, style=filled]
+  m2 [label=\"\", color=black, fillcolor=black, style=filled]
+  m3 [label=\"\", color=black, fillcolor=black, style=filled]
+  m4 [label=\"\", color=black, fillcolor=black, style=filled]
+  m5 [label=\"\", color=black, fillcolor=black, style=filled]
+  
+  r11 [label=\"\", color=black, fillcolor=\"#2E7D32\", style=filled]
+  r12 [label=\"\", color=black, fillcolor=\"#2E7D32\", style=filled]
+  r13 [label=\"\", color=black, fillcolor=\"#2E7D32\", style=filled]
+  
+  r21 [label=\"\", color=black, fillcolor=\"#C62828\", style=filled]
+  r22 [label=\"\", color=black, fillcolor=\"#C62828\", style=filled]
+  
+  m1 -> m2 -> m3 -> m4 -> m5 [color=black, penwidth=2]
+  
+  m2 -> r11 -> r12 -> r13 -> m5 [color=\"#2E7D32\", penwidth=2, weight=1, splines=true]
+  
+  m3 -> r21 -> r22 [color=\"#C62828\", penwidth=2, weight=1, splines=true]
+  
+  main [shape=none, label=\"Main\", fontcolor=black, fontsize=10]
+  rama1 [shape=none, label=\"Branch 1\", fontcolor=\"#2E7D32\", fontsize=10]
+  rama2 [shape=none, label=\"Branch 2\", fontcolor=\"#C62828\", fontsize=10]
+  
+  m5  -> main  [style=invis]  
+  r13 -> rama1   [style=invis]   
+  r22-> rama2 [style=invis]
+}"
+
+ramGit <- DiagrammeR::grViz(ramasGit)
+ramGit_image <- DiagrammeRsvg::export_svg(ramGit)
+rsvg::rsvg_png(charToRaw(ramGit_image), file = "ramasGit.png", width = 1600)
+```
+
+```{r, echo=FALSE, out.width="100%", fig.align='center'}
+knitr::include_graphics("ramasGit.png")
+```
+
+
+
+
+
+
+
+
+
+
+
+
