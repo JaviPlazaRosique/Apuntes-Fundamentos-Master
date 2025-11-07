@@ -34,6 +34,8 @@ El objetivo final para mi es llegar a comprender los fundamentos de las herramie
 
 Los conocimientos con los que ha sido redactado este documento son los adquiridos durante el módulo de Fundamentos del Master en Big Data que me encuentro en la actualidad cursando. 
 
+Cabe recalcar que ni mucho menos lo que esta en el presente documento es todo lo que se puede llegar a saber sobre las herramientas anteriormente mencionadas.
+
 \newpage 
 
 # Git.
@@ -202,7 +204,7 @@ Para conectar un repo local con uno remoto, antes tenemos que crear un repositor
 git remote add origin <URL del repositorio remoto>
 
 # origin es el nombre por el que git identifica al repo remoto, se usa ese nombre
-# por convención 
+# por convención.
 ```
 
 En el caso contrario se utilizará el siguiente comando, y esto se realizará unicamente la primera vez que "bajemos" el repo.
@@ -240,7 +242,28 @@ Ya sabiendo lo que es un commit, el comando que hará uno con los archivos que a
 ```{bash eval=FALSE}
 git commit -m "Título del commit"
 
-# -m se pone para poner un mensaje, en este caso es el título del commit
+# -m se pone para poner un mensaje, en este caso es el título del commit.
+```
+
+En el caso de que se haya realizado un commit, el cual es erroneo, se puede revertir empleando el siguiente comando: 
+
+```{bash eval=FALSE}
+git revert <Primera parte del hash>
+
+# Con primera parte del hash, se pueden emplear los caracteres que hagan único
+# el hash, deberían de bastar 6 o 7, pero se puede utilizar entero.
+
+git revert HEAD
+
+# HEAD significa el último commit realizado.
+```
+
+**¿Cómo puedo saber el hash de un commit?**
+
+Para poder saber el hash de un commit, se puede acceder al historial de cambios en el proyecto. Esto se hace mediante el siguiente comando:
+
+```{bash eval=FALSE}
+git log 
 ```
 
 **Push.**
@@ -251,10 +274,59 @@ Ya sabiendo lo que es un push, para hacer uno con los nuevos commits, se debe de
 git push origin <Nombre de la rama a la que queremos hacer el push>
 ```
 
+**Pull.**
+
+Ya sabiendo lo que es un pull, el comando que se debe emplear para hacer uno es el siguiente: 
+
+```{bash eval=FALSE}
+git push origin <Nombre de la rama a la que queremos hacer el pull>
+```
 
 
+**¿Cómo crear una rama?**
 
+Para crear una nueva rama, la cual se conecta a la rama en la que estamos situados, se utilizará el siguiente comando:
 
+```{bash eval=FALSE}
+git branch <Nombre que queremos ponerle a la rama>
+```
+
+**¿Cómo me puedo cambiar entre rama?**
+
+Para cambiar de una rama a otra, se debe de usar el siguiente comando:
+
+```{bash eval=FALSE}
+git switch <Nombre de la rama a la que queremos cambiar>
+```
+
+**¿Cómo puedo unir una rama con la rama de la que sale?**
+
+Para poder unir una rama con la rama de la que sale, primero debemos de encontrarnos en la rama de la que sale. Por ejemplo, si una ramma llamada "Rama 1" sale de main, para poder unir dicha rama con main, debemos de encontrarnos en main. Una vez estemos en la rama de la que sale, debemos de utilizar el siguiente comando: 
+
+```{bash eval=FALSE}
+git merge <Nombre de la rama que queremos unir>
+```
+
+**¿Cómo puedo eliminar una rama?**
+
+Para poder eliminar una rama, se debe de emplear el siguiente comando:
+
+```{bash eval=FALSE}
+git branch -d <Nombre de la rama que queremos eliminar>
+
+# -d se emplea cuando la rama ya está mergeada, si no lo está, no se podrá borrar
+
+# Para forzar la eliminación de la rama, se debe de cambiar -d por -D
+```
+
+## Servicio de repositorio remoto: GitHub.
+
+**GitHub** es una plataforma en la nube que permite guardar y compartir proyectos que usan Git.
+Sirve para colaborar en equipo, revisar código y mantener un historial de versiones online de tus repositorios.
+
+La parte más atractiva de GitHub, a la hora de compartir proyectos o de realizar tus propios proyectos son las Pull Request. Una Pull Request es una petición para que tus cambios se unan a la rama principal de un proyecto. Sirve para que otros revisen y aprueben tu código antes de fusionarlo.
+
+Para entender el funcionamiento de las Pull Request, es más sencillo con la siguiente imagen. 
 
 
 
