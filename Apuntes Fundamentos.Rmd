@@ -36,9 +36,11 @@ Los conocimientos con los que ha sido redactado este documento son los adquirido
 
 \newpage 
 
-# Git 
+# Git.
 
 **Git** es un sistema de control de versiones. Sirve para guardar el historial de cambios de los archivos de un proyecto, y también sirve para poder coordinar el trabajo entre varias personas sin que unos se pisen a otros.
+
+## Bases de Git.
 
 Para entender el funcionamiento de Git, antes hay que tener varios conceptos claros. Los conceptos son los siguientes:
 
@@ -158,7 +160,7 @@ ramGit_image <- DiagrammeRsvg::export_svg(ramGit)
 rsvg::rsvg_png(charToRaw(ramGit_image), file = "ramasGit.png", width = 1600)
 ```
 
-```{r, echo=FALSE, out.width="95%", fig.align='center'}
+```{r, echo=FALSE, out.width="100%", fig.align='center'}
 knitr::include_graphics("ramasGit.png")
 ```
 
@@ -168,11 +170,46 @@ Dentro de un repositorio de Git, se pueden crear una serie de archivos con funci
 
 - **.gitignore**. El archivo sirve para excluir algunos archivos, por el motivo que sea. Al excluirlos, no los elimina, pero si que no los ratrea ni incluye en los commits. Los motivos para excluir algunos archivos pueden ser variados, pero los más comunes son por las vulnerabilidades que se pueden causar (contraseñas o similar) o por el tamaño de los archivos. 
 
+Las acciones que permite hacer Git como los commits, los push y los demás, se pueden hacer mediante interfaces simples, como puede ser el ejemplo de GitHub, el cual trabaja a partir de GitHub Desktop (luego se verá). Pero para poder trabajar sin una interfaz u en una interfaz que no "tengamos controlada", también se puede trabajar por comandos desde el bash.
 
+De manera sencilla bash es un interprete de comandos del sistema, que nos permite realizar acciones como crear capetas, movernos por el ordenador (todo esto se verá en la parte de Linux), pero también permite tabajar con varias herramientas entre las cuales está Git. Según el sistema operativo del ordenador se puede usar el bash de manera diferente. Desde MacOS y Linux, viene por defecto en la terminal, y en Windows se puede emplear desde GitBash, el cual se instala junto a Git.
 
+## Comandos Git.
 
+Los comandos más importantes para usar Git son los siguientes:
 
+**Creación del repositorio.**
 
+Si se quiere crear el repositorio en el directorio actual, es decir, si la carpeta en la que estamos situados queremos convertirla en un repositorio.
+
+```{bash eval=FALSE}
+git init 
+```
+
+En el caso de que queramos crear un repositorio de cero, se puede usar lo siguiente. Esto crea el repositorio (carpeta) con el nombre que se escriba en "<directorio>". Para que se entienda, si estamos en una carpeta del ordenador, crea una carpeta dentro de ella con el nombre introducido, siendo esta el repositorio.
+
+```{bash eval=FALSE}
+git init <directorio>
+```
+
+**Conexión del repositorio local con el repositorio remoto.**
+
+En el caso de conectar un repositorio local con un repositorio remoto, se puede hacer en ambas vías. Es decir que se puede conectar un repositorio local con contenido a un repositorio remoto vacío (creado) o se puede conectar un repositorio remoto al ordenador creando así un repositorio local con el contenido existente en el repositorio remoto.
+
+Para conectar un repo local con uno remoto, antes tenemos que crear un repositorio remoto. Dicho repo se quedará vacío, ya que va a tener los archivos del repo local al conectarlos. Para hacer esto se escribe el siguiente comando en el bash:
+
+```{bash eval=FALSE}
+git remote add origin <URL del repositorio remoto>
+
+# origin es el nombre por el que git identifica al repo remoto, se usa ese nombre
+# por convención 
+```
+
+En el caso contrario se utilizará el siguiente comando, y esto se realizará unicamente la primera vez que "bajemos" el repo.
+
+```{bash eval=FALSE}
+git clone <URL del repositorio remoto>
+```
 
 
 
