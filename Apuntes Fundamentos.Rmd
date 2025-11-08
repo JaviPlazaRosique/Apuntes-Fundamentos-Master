@@ -1,6 +1,6 @@
 ---
 title: "Apuntes Fundamentos"
-author: "Javier Plaza Rosique"
+author: "Javier Plaza Rosique (j.plazarosique@gmail.com)"
 output:
   pdf_document:
     latex_engine: xelatex
@@ -375,6 +375,13 @@ knitr::include_graphics("PullRequest.png")
 
 Además de las Pull Request, GitHub ofrece otras funcionalidades. Una interesante puede ser realizar un Fork sobre un repositorio, que pertenezca a otro usuario. Realizar un Fork sobre un repo de otra persona es como hacer un copia y pega de su repositorio en los tuyos, y todos los cambios que se hagan, se hacen sobre tu copia sin afectar al repo original. A simple vista parece la función de clonar, pero es diferente. Al clonar el repositorio los cambios se mandarían por una PR al dueño del repo. 
 
+\newpage
+
+# Linux.
+
+Linux es un sistema operativo libre y de código abierto. Es un sistema estable, rápido y completamente personalizable. 
+
+La importancia de aprender sobre linux radica en que es el sistema base en ciencia de datos e IA. Y además los servidores en la nube funcionan con linux. 
 
 
 
