@@ -383,6 +383,9 @@ Linux es un sistema operativo libre y de código abierto. Es un sistema estable,
 
 La importancia de aprender sobre linux radica en que es el sistema base en ciencia de datos e IA. Y además los servidores en la nube funcionan con linux. 
 
+# Python.
+
+Python es un lenguaje de programación pensado inicialmente para que escribir código sea como leer una frase en inglés. 
 
 
 
