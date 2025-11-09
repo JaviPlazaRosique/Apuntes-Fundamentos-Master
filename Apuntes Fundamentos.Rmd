@@ -1,6 +1,6 @@
 ---
 title: "Apuntes Fundamentos"
-author: "Javier Plaza Rosique (j.plazarosique@gmail.com)"
+author: "Javier Plaza Rosique"
 output:
   pdf_document:
     latex_engine: xelatex
@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 
 \newpage
 
-# Introducción 
+# Introducción.
 
 En este documento, se podrán encontrar los conocimientos básicos sobre las siguientes herramientas:
 
@@ -35,6 +35,14 @@ El objetivo final para mi es llegar a comprender los fundamentos de las herramie
 Los conocimientos con los que ha sido redactado este documento son los adquiridos durante el módulo de Fundamentos del Master en Big Data que me encuentro en la actualidad cursando. 
 
 Cabe recalcar que ni mucho menos lo que esta en el presente documento es todo lo que se puede llegar a saber sobre las herramientas anteriormente mencionadas.
+
+La manera de contactar conmigo (creador del documento) o de ver 
+
+- **Linkedin:** www.linkedin.com/in/javiplazarosique 
+
+- **GitHub:** https://github.com/JaviPlazaRosique 
+
+- **Correo electrónico:** j.plazarosique@gmail.com
 
 \newpage 
 
@@ -385,7 +393,145 @@ La importancia de aprender sobre linux radica en que es el sistema base en cienc
 
 # Python.
 
-Python es un lenguaje de programación pensado inicialmente para que escribir código sea como leer una frase en inglés. 
+Python es un lenguaje de programación considerado de alto nivel. Es muy popular y usado por los siguientes motivos:
+
+- Es facil de aprender y leer al ser parecido al lenguaje humano (el inglés).
+- Es multipropósito, sirve tanto para desarrollo web, como para análisis de datos, o incluso para videojuegos, entre otros. 
+- Al estar muy extendido existe una gran comunidad que lo emplea y una gran cantidad de librerías. 
+
+## Mostrar por consola. 
+
+Para poder mostrar por consola el argumento que queramos, se deberá de emplear el siguiente comando:
+
+```{python eval=FALSE}
+print()
+
+# Entre paréntesis se introducirá el argumento que queramos mostrar, este puede 
+# ser una variable predefinida, una cadena de texto, entre otras opciones.
+```
+
+Por ejemplo, mostraremos Hola, Mundo por consola. 
+
+```{python}
+print("Hola, Mundo")
+```
+
+## Variables. 
+
+Una variable es un dato en forma de texto, de forma numérica u otro tipo, al que se le asigna un nombre. 
+
+Una variable se declarará del siguiente modo: 
+
+```{python eval=FALSE}
+Nombre de la variable : Tipo de dato = Dato
+```
+
+En Python, no es necesario asignar el tipo de dato, pues se asigna solo. Sin poner el tipo de dato, se escribiría del siguiente modo:
+
+```{python eval=FALSE}
+Nombre de la variable = Dato
+```
+
+Para poder nombrar variables se deben tener varías reglas en cuenta: 
+
+- No pueden empezar por números, pero si pueden contenerlos. 
+- No pueden contener ni espacios ni guiones. Aunque si que pueden contener: 
+  - Letras, teniendo encuenta que Python distingue entre mayusculas y minusculas. 
+  - Guiones bajos (_)
+  - Números
+- No se pueden usar la palabras reservadas. La lista de las palabras reservadas se pueden obetener del siguiente modo: 
+
+```{python}
+import keyword 
+
+# Se importa este módulo (se verá más tarde) donde esta la lista de las 
+# palabras reservadas.
+
+# Para mostrar la lista, y que se puedan ver todas las palábras, se usará un 
+# bucle, que se explicará más tarde.
+
+for palabraReservada in keyword.kwlist:
+  print(palabraReservada)
+```
+
+## Tipos de datos.
+
+En Python existen diferentes tipos de datos, los cuales están recogidos en la siguiente tabla. 
+
+```{r echo=FALSE}
+library(kableExtra)
+
+tipos_python <- data.frame(
+  Categoría = c(
+    "Numérico", "", "",
+    "Secuencia", "", "",
+    "Conjunto", "",
+    "Mapeo",
+    "Booleano", "Nulo"
+  ),
+  Tipo = c(
+    "int", "float", "complex",
+    "str", "list", "tuple",
+    "set", "frozenset",
+    "dict",
+    "bool", "NoneType"
+  ),
+  Descripción = c(
+    "Enteros (1, 2, 3)",
+    "Reales con decimales (3.14)",
+    "Números complejos (3 + 2i)",
+    "Cadenas de texto",
+    "Listas mutables",
+    "Tuplas inmutables",
+    "Conjuntos mutables (sin duplicados)",
+    "Conjuntos inmutables",
+    "Diccionarios (clave:valor)",
+    "Valores lógicos True/False",
+    "Ausencia de valor"
+  ),
+  check.names = FALSE
+)
+
+knitr::kable(
+  tipos_python,
+  format = "latex",
+  booktabs = TRUE,
+  align = rep("c", ncol(tipos_python)) 
+) |>
+  kableExtra::kable_styling(
+    full_width = FALSE,     
+    position   = "center",   
+    latex_options = "hold_position"  
+  )
+```
+
+Para saber que tipo de dato es un dato, se puede usar el siguiente comando:
+
+```{python eval=FALSE}
+type()
+
+# Entreparéntesis, se meterá o bien directamente el dato o bien el nombre que 
+# se le haya asignado (variable).
+```
+
+Dejo varios ejemplos para que se aprecie su funcionamiento. 
+
+```{python}
+print(type(6))
+
+print(type('Hola'))
+
+print(type(True))
+```
+
+
+
+
+
+
+
+
+
 
 
 
