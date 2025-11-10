@@ -391,6 +391,8 @@ Linux es un sistema operativo libre y de código abierto. Es un sistema estable,
 
 La importancia de aprender sobre linux radica en que es el sistema base en ciencia de datos e IA. Y además los servidores en la nube funcionan con linux. 
 
+\newpage
+
 # Python.
 
 Python es un lenguaje de programación considerado de alto nivel. Es muy popular y usado por los siguientes motivos:
@@ -524,11 +526,184 @@ print(type('Hola'))
 print(type(True))
 ```
 
+### Tipos numéricos.
+
+Como se ha observado en la tabla del inicio, dentro de los tipos de datos numéricos encontramos tres tipos diferentes. Los cuales son los siguientes: 
+
+- Enteros (int)
+- Reales con decimales (float)
+- Números complejos (complex)
+
+Cuando utilizamos este tipo de dato, no se pone entre comillas.
+
+Los numeros complejos (a + bi) se escribirán de la siguiente forma (a + bj), o incluso se pueden escribir con el siguiente comando:
 
 
+```{python eval=FALSE}
+complex(a, b)
 
+# Siendo a la parte real y b la parte imaginaria.
+```
 
+A modo de prueba se le asignará un nombre a una varible con cada uno de los tipos de datos numéricos.
 
+```{python}
+entero = 1
+flotante = 1.1
+complejo = 1+2j
+
+# Para comprobar si se han escrito bien los datos, usaremos la funcion type()
+
+print(type(entero))
+print(type(flotante))
+print(type(complejo))
+```
+
+Los tipos de datos numéricos se usan principalmente para realizar operaciones numéricas entre otras cosas. 
+
+### Tipos secuenciales.
+
+Como se ha observado en la tabla del inicio, dentro de los tipos de datos secuenciales encontramos tres tipos diferentes. Los cuales son los siguientes: 
+
+- Cadenas de texto (str)
+- Listas mutables (list)
+- Tuplas inmutables (tuple)
+
+#### Cadena de texto o strig (str).
+
+Las cadenas de texto pueden contener letras, números, signos, etc. Estas se definen entre comillas, sirviendo tanto las comillas dobles como las simples. 
+
+Además se pueden introducir otras variables en una cadena de texto, para ello se puede usar la f, la cual se emplea de la siguiente manera:
+
+```{python eval=FALSE}
+f"......{<Aqui se pone el nombre de la variable>.........}"
+```
+
+Por ejemplo, aquí tienes el resultado de emplear la f para juntar una cadena de texto con cualquier otra variable. 
+
+```{python}
+print(f"El número entero de antes es {entero}, mientras que el complejo es {complejo}")
+```
+
+A modo de prueba se le asignara a una variable un dato de tipo texto, para comprobar como sería y poder así también comprobar como funcionan algunos métodos de este tipo de dato. 
+
+```{python}
+texto = "hola"
+
+texto2 = 'adiós'
+
+# Para comprobar si se han escrito bien los datos, usaremos la funcion type()
+
+print(type(texto))
+
+print(type(texto2))
+```
+
+Para poder sacar una letra o un rango de caracteres de un dato de tipo texto, se usa el siguiente comando:
+
+```{python eval=FALSE}
+Nombre_de_la_variable[<Aquí se pone la posición o rango que queramos extraer>]
+
+# 0 es la primera posición,
+# Con -1 tendríamos la última posición.
+# El rango compredido entre la posicion X y la Y, se escribiría X:Y.
+```
+
+A continuación habrá una demostración de esto.
+
+```{python}
+print(texto[0])
+
+print(texto[-1])
+
+print(texto[2:3])
+```
+
+Además de extraer el caractér de la posición que queramos de una str, también podemos realizar otras opciones. A las funciones que realizan acciones sobre algún tipo de dato se llaman métodos. A continuación vendrán los métodos más empleados de los str, junto con una prueba de cada uno de ellos. 
+
+```{python eval=FALSE}
+len(Nombre_de_la_variable) 
+
+# Dice la longitud del texto.
+```
+
+```{python}
+print(len(texto))
+```
+
+```{python eval=FALSE}
+Nombre_de_la_variable.upper()
+
+# Devuelve todo el texto en mayúsculas
+```
+
+```{python}
+print(texto.upper())
+```
+
+```{python eval=FALSE}
+Nombre_de_la_variable.lower()
+
+# Devuelve todo el texto en minusculas
+```
+
+```{python}
+print(texto.lower())
+```
+
+```{python eval=FALSE}
+Nombre_de_la_variable.capitalize()
+
+# Devuelve la primera letra del texto en mayúsculas
+```
+
+```{python}
+print(texto.capitalize())
+```
+
+```{python eval=FALSE}
+Nombre_de_la_variable.title()
+
+# Devuelve en mayúsculas la primera letra de cada palabra
+```
+
+```{python}
+# Para esta prueba se crea una variable con varias palabras
+
+texto3 = "estoy programando con python"
+
+print(texto3.title())
+```
+
+```{python eval=FALSE}
+Nombre_de_la_variable.count("<argumento>")
+
+# Devuelve cuantas veces sse repite el argumento dentro del texto
+```
+
+```{python}
+print(texto3.count("o"))
+```
+
+```{python eval=FALSE}
+Nombre_de_la_variable.startswith("<argumento>")
+
+# Devuelve True o False dependiendo de si el texto empieza con el argumento
+```
+
+```{python}
+print(texto3.startswith("estoy"))
+```
+
+```{python eval=FALSE}
+Nombre_de_la_variable.endswith("<argumento>")
+
+# Devuelve True o False dependiendo de si el texto termina con el argumento
+```
+
+```{python}
+print(texto3.endswith("estoy"))
+```
 
 
 
