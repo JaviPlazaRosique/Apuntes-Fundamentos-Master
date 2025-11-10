@@ -678,7 +678,7 @@ print(texto3.title())
 ```{python eval=FALSE}
 Nombre_de_la_variable.count("<argumento>")
 
-# Devuelve cuantas veces sse repite el argumento dentro del texto
+# Devuelve cuantas veces se repite el argumento dentro del texto
 ```
 
 ```{python}
@@ -705,9 +705,216 @@ Nombre_de_la_variable.endswith("<argumento>")
 print(texto3.endswith("estoy"))
 ```
 
+#### Listas mutables (list)
 
+Las listas son colecciones ordenadas y modificables (mutables) de elementos. Las listas no continen claves y dentro de sus elementos no tienen porque ser todos del mismo tipo de dato. Es decir, que dentro de una lista se pueden encontrar datos numéricos, de tipo texto, o incluso otra lista. 
 
+Las listas se definen de la siguiente manera:
 
+```{python eval=FALSE}
+Nombre_de_la_lista = [<Elemento>, <Elemento>, <Elemento>, ...]
+```
+
+Para comprobar que las listas se definen como anteriormente se ha comentado, se creará una. Así también se podrá emplear para probar sus métodos. 
+
+```{python}
+lista = ["Hola", "Adiós", 1, 1+2j, ["día", "noche"]]
+
+# Para comprobar si se han escrito bien los datos, usaremos la funcion type()
+
+print(type(lista))
+```
+
+Al igual que los str y todos los tipos de datos, existen métodos útiles para el empleo de los datos. En el caso de las listas, los métodos más empleados son los que están a continuación, junto con una prueba de cada uno con la lista creada anteriormente.
+
+Para comenzar, en las cadenas de texto se puede acceder al carácter, que se encuentra en la posición que queramos. Pues en las listas podemos acceder al elemento que se encuentre en la posición que queramos. Además si un elmento es de tipo texto, tambien podemos acceder al caracter que este en la posición que queramos la mismo tiempo. 
+
+```{python eval=FALSE}
+Nombre_de_la_lista[<Posición>]
+
+# Las posiciones funcionan igual que en las cadenas de texto
+
+Nombre_de_la_lista[<Posición en la lista>][<Posición en el texto>]
+
+# Para hacer esto, el elemento de la lista debe ser de tipo str. Se puede saber 
+# de la siguiente manera.
+
+type(Nombre_de_la_lista[<Posición en la lista>])
+```
+
+```{python}
+print(lista[0])
+
+print(lista[-1])
+
+print(type(lista[0]))
+
+print(lista[1][0])
+```
+
+A continuación estarán los demás métodos, sin estar todos, puesto que existen muchos. En el caso de querer saber más, hay que recurrir a la documentación.
+
+```{python eval=FALSE}
+Nombre_de_la_lista.append(<Elemento>)
+
+# Añade el elemento al final de la lista
+```
+
+```{python}
+lista.append(5)
+
+print(lista)
+```
+
+```{python eval=FALSE}
+Nombre_de_la_lista.insert(<Posición>, <Elemento>)
+
+# Añade el elemento en la posición que queramos. Si la posición es central, 
+# Los elementos que vayan después, se desplazarán una posición.
+```
+
+```{python}
+lista.insert(3,"Posición 3")
+
+print(lista)
+```
+
+```{python eval=FALSE}
+Nombre_de_la_lista.remove(<Elemento>)
+
+# Elimina el elemento de la lista con ese nombre
+```
+
+```{python}
+lista.remove("Hola")
+
+print(lista)
+```
+
+```{python eval=FALSE}
+Nombre_de_la_lista.pop(<Posición>)
+
+# Elimina el elemento de la lista que se encuentre en esa posición
+
+# También se puede emplear el siguiente:
+
+del Nombre_de_la_lista[<Posición>]
+```
+
+```{python}
+lista.pop(-1)
+
+print(lista)
+
+del lista[0]
+
+print(lista)
+```
+
+```{python eval=FALSE}
+len(Nombre_de_la_lista)
+
+# Cuenta el número de elementos dentro de una lista.
+```
+
+```{python}
+print(len(lista))
+```
+
+#### Tuplas inmutables (tuple).
+
+Las tuplas son como las listas, pero cuyo contenido no se puede modificar (es inmutable). 
+
+Las tuplas se definen de manera similar a las listas, lo único que cambia es que en la lista se emplean [], y en las tuplas (). Se definirían del siguiente modo:
+
+```{python eval=FALSE}
+Nombre_de_la_tupla = (<Elemento>, <Elemento>, <Elemento>, ...)
+```
+
+Para comprobar que las tuplas se definen como se ha comentado, se generará una tupla. Y además se podrá emplear para probar sus métodos.
+
+```{python}
+tupla = ["Hola", "Adiós", 1, 1+2j, ["día", "noche"]]
+
+# Para comprobar si se han escrito bien los datos, usaremos la funcion type()
+
+print(type(tupla))
+```
+
+En el caso de las tuplas, al ser inmutables, no existen métodos que las modifiquen. Aunque si que existen algunos métodos para realizar operaciones con ellas, entre otras cosas.
+
+La forma de acceder a cualquier elemento de la tupla es la misma forma que en las listas. 
+
+```{python eval=FALSE}
+Nombre_de_la_tupla.count(<Elemento>)
+
+# Devuelve el número de elementos que coincide con el elemento introducido.
+```
+
+```{python}
+print(tupla.count(1))
+```
+
+```{python eval=FALSE}
+len(Nombre_de_la_tupla)
+
+# Devuelve el número de elementos que hay en la lista
+```
+
+```{python}
+print(len(tupla))
+```
+
+Como se ha comentado anteriormente, hay métodos que permiten realizar operaciones matemáticas con los elementos de las tuplas. Para comprobar algunos, se generará una tupla con elementos de tipo numérico.
+
+```{python}
+tuplaNumerica = (1, 2, 3, 4, 5)
+```
+
+```{python eval=FALSE}
+max(Nombre_de_la_tupla)
+
+# Devuelve el número más alto que se encuentre dento de la tupla.
+```
+
+```{python}
+print(max(tuplaNumerica))
+```
+
+```{python eval=FALSE}
+sum(Nombre_de_la_tupla)
+
+# Devuelve la suma de todos los elemntos del interior de la tupla.
+```
+
+```{python}
+print(sum(tuplaNumerica))
+```
+
+```{python eval=FALSE}
+sorted(Nombre_de_la_tupla)
+
+# Devuelve la tupla de manera ordenada, esta opcion tambien existe en las listas,
+# y se pueden ordenar siguiendo alguna norma. Su funcionamiento general es:
+
+sorted(<Nombre variable>, key = <regla de ordenacion, ej. len>, reverse = True)
+
+# Reverse = True, saca la lista invertida a como saldría sin ponerla.
+```
+
+```{python}
+print(sorted(tuplaNumerica))
+```
+
+Para probar el método sorted, tambien con una tupla con unicamente texto, se creará una nueva tupla.
+
+```{python}
+tuplaTexto = ("Hola", "Adiós", "uno", "esternocleidomastoideo")
+
+print(sorted(tuplaTexto, key=len)) # Ordena por longuitud
+
+print(sorted(tuplaTexto, key=len, reverse=True)) # Ordenada de más largo a menos
+```
 
 
 
