@@ -6,6 +6,7 @@ output:
     latex_engine: xelatex
     toc: true
     number_sections: true
+    toc_depth: 3
 lang: es 
 ---
 
@@ -915,6 +916,325 @@ print(sorted(tuplaTexto, key=len)) # Ordena por longuitud
 
 print(sorted(tuplaTexto, key=len, reverse=True)) # Ordenada de más largo a menos
 ```
+
+### Tipos de conjuntos.
+
+Como se ha observado en la tabla del inicio, dentro de los tipos de datos que son conjuntos encontramos dos tipos diferentes. Los cuales son los siguientes: 
+
+- Conjuntos mutables (set)
+- Conjuntos inmutables (frozenset)
+
+Tanto los conjuntos mutables como los inmutables, son similares al funcionamiento de las listas y las tuplas. La única diferencia es que en los conjunto no se pueden repetir elementos. A efectos prácticos, los conjuntos mutables funcionan como las listas y los conjuntos inmutables funcionan como las tublas. 
+
+La manera de definir los conjuntos mutables es la siguiente:
+
+```{python eval=FALSE}
+Nombre_del_conjunto_mutable = [<Elemento>, <Elemento>, <Elemento>, ...]
+
+Nombre_del_conjunto_mutable = set(Nombre_del_cojunto_mutable)
+
+# Tambiém se puede hacer sin generar una lista anteriormente
+
+Nombre_del_conjunto_mutable = set([<Elemento>, <Elemento>, <Elemento>, ...])
+```
+
+Para comprobar que es así, se genera un conjunto mutable. Teniendo en cuenta que los métodos de las listas son los mismos que el de los conjuntos mutables, no se probará ninguno, pues el funcionamiento es el mismo.
+
+```{python}
+conjuntoMutable = [1,2,2,2,3,4,5,5,6]
+
+conjuntoMutable = set(conjuntoMutable)
+
+print(conjuntoMutable)
+
+# Para comprobar si se han escrito bien los datos, usaremos la funcion type()
+
+print(type(conjuntoMutable))
+```
+
+La manera de definir los conjuntos mutables es la siguiente:
+
+```{python eval=FALSE}
+Nombre_del_conjunto_inmutable = [<Elemento>, <Elemento>, <Elemento>, ...]
+
+Nombre_del_conjunto_inmutable = frozenset(Nombre_del_cojunto_inmutable)
+
+# Tambiém se puede hacer sin generar una lista anteriormente
+
+Nombre_del_conjunto_inmutable = frozenset([<Elemento>, <Elemento>, <Elemento>, ...])
+```
+
+Para comprobar que es así, se genera un conjunto inmutable. Teniendo en cuenta que los métodos de las tuplas son los mismos que el de los conjuntos inmutables, no se probará ninguno, pues el funcionamiento es el mismo.
+
+```{python}
+conjuntoInmutable = ['A','A','B','C','D','D']
+
+conjuntoInmutable = frozenset(conjuntoInmutable)
+
+print(conjuntoInmutable)
+
+# Para comprobar si se han escrito bien los datos, usaremos la funcion type()
+
+print(type(conjuntoInmutable))
+```
+
+### Diccionarios (dict).
+
+Los diccionarios son colecciones de pares **clave:valor**. Los pares clave:valor son como una caja con etiquetas, cada etiqueta (clave) tiene algo guardado dentro (valor). El valor puede ser cualquier tipo de dato, incluyendo hasta a los mismos diccionario, mientras que las claves deben de ese de algún tipo de dato inmutable, sindo el más comun las str
+
+Los diccionarios se definen del siguiente modo:
+
+```{python eval=FALSE}
+Nombre_del_diccionario = {<clave>:<valor>, <clave>:<valor>, ...}
+```
+
+A modo de prueba, para comprobar como se generan los diccionarios y además poder así probar los métodos de los diccionarios con ejemplos.
+
+```{python}
+diccionario = {
+  "nombre":"Antonio",
+  "edad":55,
+  "dirección":{
+    "calle":"Calle de la música",
+    "número":12
+    },
+  "colores_favoritos":["azul", "verde", "naranja"]
+  }
+  
+# Para comprobar que lo hemos crado correctamente, probamos con type()
+
+print(type(diccionario))
+
+# Para comprobar los resultados de los métodos y como se vería el diccionario
+# completo, se empleará el siguiente bucle (mas tarde se explicarán)
+
+for clave, valor in diccionario.items():
+  print(f"{clave}: {valor}")
+```
+
+Para poder acceder a cualquier valor que se encuentre dentro del diccionario, se debe emplear el siguiente comando:
+
+```{python eval=FALSE}
+Nombre_del_diccionario[<clave>]
+```
+
+```{python}
+print(diccionario["colores_favoritos"])
+```
+
+Al igual que todos los tipos de datos, los diccionarios tienen sus métodos. Algunos de los métodos más utilizados con los diccionarios son los que estarán a continución. 
+
+```{python eval=FALSE}
+Nombre_del_diccionario.clear()
+
+# Elimiina todos los elementos del diccionario
+```
+
+```{python}
+diccionario.clear()
+
+# Se usa el condicional if para poder saber si de verdad viene vacío.
+
+if len(diccionario) == 0:
+  print("El diccionario está vacío.")
+else:
+  for clave, valor in diccionario.items():
+    print(f"{clave}: {valor}")
+```
+
+Para poder comprobar los demás métodos, se generará nuevo contenido en el diccionario. 
+
+```{python}
+diccionario = {
+  "nombre":"Antonio",
+  "edad":55,
+  "dirección":{
+    "calle":"Calle de la música",
+    "número":12
+    },
+  "colores_favoritos":["azul", "verde", "naranja"]
+  }
+```
+
+```{python eval=FALSE}
+Nombre_del_diccionario.item()
+
+# Devuelve la clave:valor de todo el diccionario en forma de tupla.
+
+# Este no se prueba, puesto que se usa en el bucle para mostrar los datos. 
+```
+
+```{python eval=FALSE}
+Nombre_del_diccionario.get(<clave>)
+
+# Devuelve el valor que corresponde a la clave escrita.
+```
+
+```{python}
+print(diccionario.get("nombre"))
+```
+
+```{python eval=FALSE}
+Nombre_del_diccionario.keys()
+
+# Devuelve todas las claves del diccionario.
+```
+
+```{python}
+for clave in diccionario.keys():
+  print(clave)
+```
+
+```{python eval=FALSE}
+Nombre_del_diccionario.values()
+
+# Devuelve todos los valores del diccionario.
+```
+
+```{python}
+for valor in diccionario.values():
+  print(valor)
+```
+
+```{python eval=FALSE}
+Nombre_del_diccionario.pop(<clave>)
+
+# Elimina la calve y su valor asignado. También serviría:
+
+del Nombre_del_diccionario[<clave>]
+```
+
+```{python}
+diccionario.pop("nombre")
+
+del diccionario["edad"]
+
+for clave, valor in diccionario.items():
+  print(f"{clave}: {valor}")
+```
+
+```{python eval=FALSE}
+Nombre_del_diccionario[<clave>] = <valor>
+
+# Crea una nueva clave con su valor asignado.
+```
+
+```{python}
+diccionario[123] = "clave de forma numérica"
+
+for clave, valor in diccionario.items():
+  print(f"{clave}: {valor}")
+```
+
+### Tipos booleanos (bool).
+
+Los datos de tipo booleano, son de tipo lógico y expresan True o False, en función de si la afirmación es cierta (True) o falsa (False). Funciona principalmente con operadores, pero tambíen se puede definir una variable de este tipo. 
+
+La definición de una variable de este tipo se hará del siguiente modo:
+
+```{python eval=FALSE}
+Nombre_de_la_variable_booleana = True o False
+```
+
+Para comprobarlo, se crea una variable de tipo booleano. 
+
+```{python}
+booleano = True
+
+# Para comprobar si se han escrito bien los datos, usaremos la funcion type().
+
+print(type(booleano))
+```
+
+## Operadores.
+
+Un operador es un símbolo o palabra que indica una operación que se aplica a uno o más valores llamados operandos.
+
+### Operadores aritméticos.
+
+Los operadores aritméticos sirven para realizar cáculos matemáticos elementales entre variables numéricas. Los operadores aritméticos son los siguientes:
+
+- $+$ $\longrightarrow$ Suma.
+- $-$ $\longrightarrow$ Resta.
+- $*$ $\longrightarrow$ Multiplicación.
+- $/$ $\longrightarrow$ División.
+- $//$ $\longrightarrow$ División entera (redondea a la baja).
+- $\%$ $\longrightarrow$ Módulo o resto de la división.
+- $**$ $\longrightarrow$ Potencia.
+
+Se cearán dos variables numéricas para poder realizar las operaciones y comprobar como funcionan y sí realizan las operaciones anteriormente mencionadas. 
+
+```{python}
+a = 2
+b = 9
+
+print(a + b)
+print(a - b)
+print(a * b)
+print(a / b)
+print(a // b)
+print(a % b)
+print(a ** b)
+```
+
+Para comprobar si los operadores aritméticos funcionan también con datos de tipo str, se van a crear dos variables de este tipo. Al mismo tiempo que se prueba con el método (try except), que se explicará más adelante. Los únicos operadores que podrían funcionar aparentemente con este tipo de datos, pueden llegar a ser la suma y la resta, por eso únicamente se probarán estos.
+
+```{python}
+a = "Hola"
+b = "Adios"
+
+try:
+  a + b 
+  print(a + b)
+except Exception as e:
+  print("Error", e)
+  
+try:
+  a - b 
+  print(a - b)
+except Exception as e:
+  print("Error", e)
+  
+try:
+  a - "a" 
+  print(a - "a")
+except Exception as e:
+  print("Error", e)
+```
+
+### Operadores de asignación. 
+
+Los operadores de asignación asignan valores a variables y, a veces, realizan operaciones al mismo tiempo. Los operadores de asignación son los siguientes:
+
+- $=$ $\longrightarrow$ Asigna un valor.
+- $<Operador aritmétivo>=$ $\longrightarrow$ Realiza una operación sobre sí mismo. 
+
+Para comprobar como se puede realizar una operación sobre una variable predefinida, se crea una nueva variable y se prueba esto. 
+
+```{python}
+a = 999
+a+=1
+
+print(a)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
