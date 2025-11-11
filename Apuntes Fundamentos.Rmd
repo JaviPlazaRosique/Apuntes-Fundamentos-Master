@@ -1495,9 +1495,186 @@ for palabra in palabras:
 
 Dentro de ambos bucles existen algunas funciones útiles, como pueden ser las siguientes: 
 
-- **break** $\longrightarrow$ Sirve para detenr el bucle completamente cuando se cumple una condición, se debe de emplear if.
-- **continue** $\longrightarrow$ Sirve para saltar una interacción (una vuelta del bucle) y continuar con la siguiente. 
-- **else** $\longrightarrow$ Es parecido al "else" del condicional if-elif-else, pero en este caso, se ejecuta siempre que termina el bucle.
-- **zip** $\longrightarrow$ Une dos o más listas emparejando sus elementos. Se puede emplear en ambos tipos de bucles, pero esta diseñado para emplearse en el bucle for.
+- **break** $\longrightarrow$ Sirve para detenr el bucle completamente cuando se cumple una condición, se debe de emplear con un if.
+- **continue** $\longrightarrow$ Sirve para saltar una interacción (una vuelta del bucle) y continuar con la siguiente,  se debe de emplear con un if.
+- **else** $\longrightarrow$ Es parecido al "else" del condicional if-elif-else, pero en este caso, se ejecuta siempre que termina el bucle. Si se interrumpe con un break, no saldría.
+- **zip()** $\longrightarrow$ Une dos o más listas emparejando sus elementos. Se puede emplear en ambos tipos de bucles, pero esta diseñado para emplearse en el bucle for.
+- **range()** $\longrightarrow$ Genera una secuencia de números que se puede recorrer en un bucle. Se puede emplear en ambos tipos de bucles, pero esta diseñado para emplearse en el bucle for.
+- **enumerate()** $\longrightarrow$ Permite acceder al índice y al valor de una secuencia al mismo tiempo, muy útil cuando necesitas saber en qué posición estás dentro del bucle. Se puede emplear en ambos tipos de bucles, pero esta diseñado para emplearse en el bucle for.
+- **pass** $\longrightarrow$ UIndica que no se ejecutará ninguna acción en ese punto del código. Se usa como marcador temporal o cuando la estructura del bucle necesita una instrucción obligatoria.
+
+ A continuación se presenta algún ejemplo para cada una de las funcionalidades. Las funcionalidades que están pensadas para el bucle for, solo se probarán con este, pues no vamos a ir contracorriente al usar una función para el bucle while cuando no esta pensada para el mismo. 
+ 
+ **BREAK**
+ 
+```{python}
+contador = 0 
+
+while contador <= 10:
+  print(contador)
+  contador += 1
+  if contador == 3:
+    break
+```
+ 
+```{python}
+numeros = [1, 2, 3, 4, 5, 6]
+
+for numero in numeros:
+  print(numero)
+  if numero == 3:
+    break
+```
+
+**CONTINUE**
+
+```{python}
+contador = 0 
+
+while contador <= 10:
+  print(contador)
+  contador += 1
+  if contador == 3:
+    continue
+```
+ 
+```{python}
+numeros = [1, 2, 3, 4, 5, 6]
+
+for numero in numeros:
+  print(numero)
+  if numero == 3:
+    continue
+```
+
+
+**ELSE**
+
+```{python}
+contador = 0 
+
+while contador <= 10:
+  print(contador)
+  contador += 1
+else:
+  print("Se ha terminado el bucle")
+```
+ 
+```{python}
+numeros = [1, 2, 3, 4, 5, 6]
+
+for numero in numeros:
+  print(numero)
+else:
+  print("Se ha terminado el bucle")
+```
+
+**ZIP()**
+
+El funcionamiento general de esta función es la siguiente:
+
+```{python eval=FALSE}
+for <variable 1>, <variable 2> in zip(<secuencia 1>, <secuencia 2>):
+  <código que se ejecutará mientras que hayan elementos en las secuencias>
+  
+# Se pueden poner tantas variables, y por tanto, secuencias como se quieran.
+```
+
+Por ejemplo:
+
+```{python}
+nombres = ["Ana", "Luis"]
+edades = [20, 25]
+
+for nombre, edad in zip(nombres, edades):
+  print(f"{nombre} tiene {edad} años")
+```
+
+En el caso de que las secuencias no tengan el mismo número de elementos, el bucle funcionará, y repetirá el bloque de código el número de veces que sea igual al número de elmentos que tiene la secuencia con menos de los mismos. Tal y como se puede observar a continuación:
+
+```{python}
+nombres = ["Ana", "Luis"]
+edades = [20, 25, 30]
+
+for nombre, edad in zip(nombres, edades):
+  print(f"{nombre} tiene {edad} años")
+```
+
+**RANGE()**
+
+El funcionamiento general de esta función es la siguiente:
+
+```{python eval=FALSE}
+for <variable> in range(<número>, <número>):
+  <código que se ejecutará mientras que queden números en el rango>
+```
+
+Por ejemplo:
+
+```{python}
+for i in range(2, 6): # En todos los bucles se pone i por convención, pero 
+  print(i)            # personalmente prefiero poner el nombre de la variable.
+```
+
+**ENUMERATE()**
+
+El funcionamiento general de esta función es la siguiente:
+
+```{python eval=FALSE}
+for <enumeración>, <variable> in enumerate(<secuencia>, start=<número>):
+  <código que se ejecutará mientras que hayan elementos en la secuencia>
+  
+# En enumeración se puede poner lo que se quiera.
+```
+
+Por ejemplo:
+
+```{python}
+frutas = ["manzana", "pera", "uva"]
+
+for enumeracion, fruta in enumerate(frutas, start=1):
+    print(enumeracion, fruta)
+```
+
+## Funciones.
+
+Las funciones son bloques de código reutilizable que ejecuta una tarea concreta. Para poder activar una función, hay que poner el nombre asignado y tras ello, unos paréntesis. Las funciones se confeccionan del siguiente modo:
+
+```{python eval=FALSE}
+def <Nombre de la función>(<parámetros>):
+  <codigo a ejecutar por parte de la función (pueden ser mas filas)>
+  return <lo que queremos que devuelva la función>
+
+# No es obligatorio establecer parámetros, se puede hacer sin ellos. 
+
+# No es necesario escribir return, pero si que es necesario definir que va a ocurrir.
+```
+
+Algunos ejemplos de funciones se pueden encontrar a continuación, teniendo diferentes ejemplos de como se pueden redactar (con return o sin return), o incluso sin parametros.
+
+```{python}
+def sumar(a, b):
+  return a + b
+
+print(sumar(2, 5))
+
+def suma(a, b):
+  print(a + b)
+  
+suma(5, 8)
+
+def Sumar(a, b):
+  return print(a + b)
+
+Sumar(1, 2)
+```
+
+```{python}
+def imprimeCosas():
+  print("Estoy escribiendo por consola este mensaje a partir de una función")
+  
+imprimeCosas()
+```
+
 
 
