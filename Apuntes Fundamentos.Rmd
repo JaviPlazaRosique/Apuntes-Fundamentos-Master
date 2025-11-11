@@ -1207,7 +1207,7 @@ except Exception as e:
 Los operadores de asignación asignan valores a variables y, a veces, realizan operaciones al mismo tiempo. Los operadores de asignación son los siguientes:
 
 - $=$ $\longrightarrow$ Asigna un valor.
-- $<Operador aritmétivo>=$ $\longrightarrow$ Realiza una operación sobre sí mismo. 
+- $<Operador\ aritmétivo>=$ $\longrightarrow$ Realiza una operación sobre sí mismo. 
 
 Para comprobar como se puede realizar una operación sobre una variable predefinida, se crea una nueva variable y se prueba esto. 
 
@@ -1218,27 +1218,286 @@ a+=1
 print(a)
 ```
 
+### Operadores de comparación.
+
+Los operaciones de coparación permiten comparar valores y devuelven un resultado booleano (True o False). Los operadores de comparación son los siguientes:
+
+- $==$ $\longrightarrow$ Igual que.
+- $!=$ $\longrightarrow$ Distinto de.
+- $>$ $\longrightarrow$ Mayor que.
+- $<$ $\longrightarrow$ Menor que.
+- $>=$ $\longrightarrow$ Mayor o igual que.
+- $<=$ $\longrightarrow$ Menor o igual que.
+
+Para comprobar como funcionan, se crearán una serie de variables de tipo numérico para poder ver como sería el resultado.
+
+```{python}
+a = 12
+b = 5.25
+
+print(a == b)
+print(a != b)
+print(a > b)
+print(a < b)
+print(a >= b)
+print(a <= b)
+```
+
+El comportamiento de los operadores de comparación con variables de tipo str, es diferente y algo menos intuitivo. El lenguaje Python interpreta las comparaciones con las siguientes reglas:
+
+- Al emplear == o !=, tiene en cuenta caractér por caractér, teniendo en cuenta las mayusculas y los espacios a la hora de decidir si es verdadera o falsa la afirmación.
+- Al emplear los demás operadores (>, <, >=, <=), tiene en cuenta otros criterios, los cuales son los siguientes:
+  - Tiene en cuenta primero el numero de caracteres, y en el caso de que el número de caracteres sea el mismo, tiene en cuenta el orden alfabético (dado por Unicode).
+
+Para comporobar esto, se crearán una serie de variables y se emplearán una serie de operadores de comparación.
+
+```{python}
+a = "abcd"
+b = "abc"
+c = "zyx"
+e = "ABC"
+
+print(a == b)
+print(b != e)
+print(a > b)
+print(b > c)
+```
 
 
+### Operadores lógicos. 
 
+Los operadores lógicos se usan para combinar condiciones. Devolviendo un valor booleando dependiendo de los argumentos empleados. Los operadores lógicos son los siguientes: 
 
+- and $\longrightarrow$ Y $\longrightarrow$ Verdadero si las condiciones combinadas son verdaderas.
+- or $\longrightarrow$ O $\longrightarrow$ Verdader si una de las condiciones combinadas es verdadera.
+- not $\longrightarrow$ NO $\longrightarrow$ Invierte el valor lógico.
 
+Para comprobar el funcionamiento de los operadores lógicos, se emplearán una serie de variables que se van a crear a continuación. Como el funcionamiento de los operadores lógicos funcionan en conjunto con los operadores de comparación, solo se comprobarán con variables de tipo numérico.
 
+```{python}
+a = 5
+b = 10
+c = 80
 
+print(type(a) == int and a < b)
+print(a > b or b < c)
+print(a < b or b < c)
+print(not a < b)
+```
 
+### Operadores de identidad. 
 
+Los operadores de identidad comparan si dos objetos son el mismo, no solo si tienen el mismo valor. Devolviendo un valor booleano. Los operadores de identidad son los siguientes.
 
+- is $\longrightarrow$ Devuelve True si son el mismo objeto. La diferencia con el operador de comparación == es que no compara el valor, si tienen la misma referencia o no. 
+- is not $\longrightarrow$ Devuelve True si no son el mismo objeto. La diferencia con el operador de comparación != es que no compara el valor, si tienen la misma referencia o no. 
 
+Para comprobar esto, puesto que es algo abstracto, se realizarán varios ejemplos.
 
+```{python}
+a = [1, 2]
+b = [1, 2]
+c = a
 
+print(a is b)
+print(a is c)
+print(a is not b)
+```
 
+### Operadores de pertenencia.
 
+Los operadores de pertenenecia comprueban si un elemento está dentro de una secuencia, ya sea un texto (str), una lista u otra secuencia, devolviendo un valor booleano dependiendo de cuales sean los argumentos empleados. Los tipos de operadores de pertenencia son los siguientes:
 
+- in $\longrightarrow$ Es verdadero cuano el elemento esta dentro del otro. 
+- not in $\longrightarrow$ Es verdadero cuando el elemento no esta dentro del otro. 
 
+Para comprobar su funcionamiento se crearán varios ejemplos de cada uno. 
 
+```{python}
+a = [1, 2]
+b = "Hola"
 
+print(1 in a)
+print("a" in b)
+print("h" not in b) # Para demostrar que python diferencia las mayúsculas.
+print(" " in b) # Para demostrar que python diferencia los espacios en blanco
+```
 
+## Condicionales. 
 
+Los condicionales son instrucciones que ejecutan un bloque de código solo si una condición es verdadera (True). 
 
+Si la condición es falsa (False), puede ejecutar otra parte diferente o no hacer nada, dependiendo de las instrucciones que le pongamos al código. 
+
+Existen dos tipos de condicionales, los cuales son los siguientes:
+
+- El condicional **if-elif-else**.
+- El condicional **match-case**.
+
+### IF-ELIF-ELSE.
+
+El condicional if-elif-else, tiene el siguiente funcionamiento:
+
+```{python eval=FALSE}
+if <condición>:
+  <código que se ejecutará cuando la condición sea cierta>
+elif <condición>:
+  <código que se ejecutará cuando la condicion sea verdadera y la primera sea falsa>
+      . 
+      . 
+      . # Esto refleja que se pueden poner tantos elif como se quieran
+      . 
+      . 
+elif <condición>:
+  <código que se ejecutará cuando la condicion sea verdadera y las anteriores falsas>
+else:
+  <código que se ejecutará cuando todas las condiciones sean falsas>
+```
+
+El funcionamiento con palabras es:
+
+1. Si pasa esto, haz esto. Si no pasa, pasa al siguiente paso.
+2. Si pasa esto, haz esto. Si no pasa, pasa al siguiente paso. 
+3. Si no ha ocurrido nada de los que se ha dicho anteriormente, haz esto. 
+
+Para ver como funcionaría el condicional se emplearán un par de ejemplos. 
+
+```{python}
+persona = {
+  'nombre':'Pepe',
+  'edad':18
+}
+
+if persona['edad'] >= 18:
+  print(f'{persona['nombre']} es mayor de edad')
+else:
+  print(f'{persona['nombre']} es menor de edad')
+```
+
+```{python}
+persona = {
+  'nombre':'Luisa',
+  'nota':4.9
+}
+
+if persona['nota'] >= 9:
+    print(f"{persona['nombre']} tiene un sobresaliente")
+elif persona['nota'] >= 7:
+    print(f"{persona['nombre']} tiene un notable")
+elif persona['nota'] >= 5:
+    print(f"{persona['nombre']} tiene un aprobado")
+else:
+    print(f"{persona['nombre']} esta suspenso, tiene que repetir la prueba")
+```
+
+### MATCH-CASE.
+
+El condicional match-case, es menos usado, pero también es interesante conocer su funcionamiento. El funcionamiento es el siguiente: 
+
+```{python eval=FALSE}
+match <variable predefinida>:
+  case <valor>:
+    <código que se ejecutará cuando la variable sea == al valor>
+  case <valor>:
+    <código que se ejecutará cuando la variable sea == al valor>
+        . 
+        . 
+        . # Esto refleja que se puede poner tantas veces como se quiera case
+        . 
+        . 
+  case _:
+    <código que se ejecutará si nunguno de los casos anteriores ocurren>
+```
+
+El funcionamiento en palabras de este condicional es parecido al if-elif-else, pero difiere un poco. Sería del siguiente modo:
+
+1. Si el valor es igual a esto, haz esto, si no es igual, pasa al siguiente.
+2. Si el valor es igual a esto, haz esto, si no es igual, pasa al siguiente.
+3. Si el valor no es igual a nada de lo que he puesto, haz esto. 
+
+Para ver como funcionaría el condicional se empleará algún ejemplo. 
+
+```{python}
+color = "verde"
+  
+match color:
+  case "rojo":
+    print("Detente")
+  case "verde":
+    print("Sigue")
+  case "amarillo":
+    print("Precaución")
+  case _:
+    print("Color desconocido")
+```
+
+## Bucles. 
+
+Los bucles son estructuras que permiten repetir un bloque de código varias veces. En lugar de escribir lo mismo una y otra vez, el programa repite las instrucciones mientras se cumpla una condición o para cada elemento de la secuencia (una lista, por ejemplo). 
+
+Existen dos maneras de definir un bucle, siendo las siguientes:
+
+- while $\longrightarrow$ "mientras que ..."
+- for $\longrightarrow$ "por cada uno de los elementos ..."
+
+### WHILE.
+
+El bucle while repetirá un bloque de código siempre que la condición puesta sea verdadera, o dicho de otra manera, repetirá el bloque de código hasta que la condición sea falsa.
+
+El bucle while se configurará del siguiente modo:
+
+```{python eval=FALSE}
+while <condición>:
+  <código que se ejecutará mientras que se cumpla la condición>
+  # Pueden ser varias líneas de código.
+```
+
+El funcionamiento del bucle while en palabras es el siguiente:
+
+- Mientras que ocurra esto, no pares de hacer esto.
+
+Para ver como funciona el bucle while, a continuación se encuentran varios ejemplos.
+
+```{python}
+contador = 0 
+
+while contador <= 5:
+  print(f"Se está imprimiendo en consola el contador nº {contador}")
+  contador += 1 
+```
+
+### FOR.
+
+El bucle for repetirá un bloque de código por cada elemento de una secuencia, como una lista, una cadena, una tupla o un rango de números.
+
+El bucle for se configurará del siguiente modo:
+
+```{python eval=FALSE}
+for <variable> in <secuencia>:
+  <código que se ejecutará mientras que hayan elementos en la secuencia>
+  # Pueden ser varias líneas de código.
+```
+
+El funcionamiento del bucle for en palabras es el siguiente:
+
+-  Por cada variable en la secuencia, haz esto.
+
+Para ver como funciona el bucle for, a continuación se encuentran varios ejemplos.
+
+```{python}
+palabras = ['hola', 'adios', 'árbol', 'nube']
+
+for palabra in palabras:
+  print(f"La palabra por la que vamos en el bucle es: {palabra}")
+```
+
+### Consideraciones para ambos bucles.
+
+Dentro de ambos bucles existen algunas funciones útiles, como pueden ser las siguientes: 
+
+- **break** $\longrightarrow$ Sirve para detenr el bucle completamente cuando se cumple una condición, se debe de emplear if.
+- **continue** $\longrightarrow$ Sirve para saltar una interacción (una vuelta del bucle) y continuar con la siguiente. 
+- **else** $\longrightarrow$ Es parecido al "else" del condicional if-elif-else, pero en este caso, se ejecuta siempre que termina el bucle.
+- **zip** $\longrightarrow$ Une dos o más listas emparejando sus elementos. Se puede emplear en ambos tipos de bucles, pero esta diseñado para emplearse en el bucle for.
 
 
