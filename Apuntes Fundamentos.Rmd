@@ -1739,7 +1739,7 @@ mezcla(1, 2, 3, 4, nombre="Ana", edad=30, ciudad="Murcia")
 
 ### Funciones lamda.
 
-Las funciones lamda son funciones sencillas que se escriben en una única línea. Las funciones lambda se definen de la siguiente manera:
+Las funciones lamda son funciones sencillas que se escriben en una única línea. Este tipo de funciones se emplean para funciones sencillas, puesto que tendríamos la restricción de escritura de una línea. Las funciones lambda se definen de la siguiente manera:
 
 ```{python eval=FALSE}
 Nombre_de_la_función = lambda <parámetros>: <expresión>
@@ -1755,6 +1755,44 @@ print(suma(2, 3))
 textoMayusculas = lambda texto: texto.upper()
 
 print(textoMayusculas("Lucas"))
+```
+
+### Función input().
+
+La función input() permite pedirle un dato a un usuario por consola. La forma de emplear esta función es la siguiente:
+
+```{python eval=FALSE}
+Nombre_de_la_variable_introducida = input("<mensaje que se muestra en consola>")
+```
+
+Como este tipo de documento no permite interactuar, no se puede probar. 
+
+El principal problema que tiene esta función es que todos los datos que se introducen por consola vienen con tipo str. Para poder cambiar de tipo str a otro, se puede emplear el siguiente método: 
+
+```{python eval=FALSE}
+int(<Nombre_de_la_variable_introducida>) # Si el número es entero
+
+float(<Nombre_de_la_variable_introducida>) # Si el número tiene decimales
+```
+
+Para poder probar estos cambios, como no se puede hacer con input, se hará con unas variables inventadas que sean de tipo str.
+
+```{python}
+input1 = "1"
+
+print(type(input1)) # Antes de cambiarlo.
+
+input1 = int(input1) 
+
+print(type(input1)) # Después de cambiarlo.
+
+input2 = "2.22"
+
+print(type(input2)) # Antes de cambiarlo.
+
+input2 = int(input2) 
+
+print(type(input)) # Después de cambiarlo.
 ```
 
 ## Programación orientada a objetos.
