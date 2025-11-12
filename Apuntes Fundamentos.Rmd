@@ -1676,5 +1676,88 @@ def imprimeCosas():
 imprimeCosas()
 ```
 
+A la hora de trabajar con las funciones en Python, se debe de tener en cuenta la diferencia entre argumentos posicionales y no posicionales. Y también se debe de tener en cuenta que ambos se pueden combinar. 
+
+- Los argumentos posicionales son valores que se pasan a una función basándose en su orden o posición en la llamada a la función.
+- Los argumentos no posicionales son valores que se pasan a una función especificando explícitamente el nombre del parámetro al que pertenecen.
+
+A modo de prueba, para entender como funcionan los argumentos posicionales y los no posicionales, se emplearán algunos ejemplos. 
+
+```{python}
+def posicionales(a, b, c, d):
+    print(f"{a}, {b}, {c}, {d}")
+
+posicionales(1, 2, 3, 4)
+
+def NOposicionales(a, b, c, d):
+    print(f"{a}, {b}, {c}, {d}")
+
+NOposicionales(d=4, b=2, a=1, c=3)
+
+# Al combinarlos, primero posicionales y luego por nombre, sin repetir parámetros.
+def combinados(a, b, c, d):
+    print(f"{a}, {b}, {c}, {d}")
+
+combinados(2, 4, c=3, d=1)  
+```
+
+Además de esto, también se debe de tener en cuenta que se puede hacer que el número de argumentos que acepte una función sean variables. Esto se puede hacer, poniendo tanto un número variable de argumentos posicionales como de argumentos no posicionales. La manera de indicar que se quieren poner un número variable de argumentos en una función es de la siguiente forma:
+
+```{python eval=FALSE}
+# Para argumentos posiconales variables
+def <Nombre de la función>(*args): # Se pone args por convención, pero se puede
+                                   # poner otro nombre. Lo que importa es el *
+                                   
+# Para argumentos no posiconales variables
+def <Nombre de la función>(**kwargs): # Se pone kwargs por convención, pero se puede
+                                   # poner otro nombre. Lo que importa es el **
+                                   
+# También se pueden combinar los dos, pero siempre se deben de poner primero los
+# argumentos posicionales.
+```
+
+```{python}
+def sumar_todo(*args):
+    total = sum(args)
+    print(f"La suma de todos los números es: {total}")
+
+sumar_todo(1, 2, 3)
+
+def mostrar_info(**kwargs):
+    for clave, valor in kwargs.items():   
+        print(f"{clave}: {valor}")
+
+mostrar_info(nombre="Antonio", edad=85, ciudad="Madrid")
+
+def mezcla(a, *args, **kwargs):
+    print(f"Argumento fijo: {a}")
+    print(f"Argumentos posicionales variables: {args}")
+    print(f"Argumentos no posicionales variables: {kwargs}")
+
+mezcla(1, 2, 3, 4, nombre="Ana", edad=30, ciudad="Murcia")
+```
+
+### Funciones lamda.
+
+Las funciones lamda son funciones sencillas que se escriben en una única línea. Las funciones lambda se definen de la siguiente manera:
+
+```{python eval=FALSE}
+Nombre_de_la_función = lambda <parámetros>: <expresión>
+```
+
+Para probar como funciona, se realizan varios ejemplos.
+
+```{python}
+suma = lambda a, b: a + b
+
+print(suma(2, 3))
+
+textoMayusculas = lambda texto: texto.upper()
+
+print(textoMayusculas("Lucas"))
+```
+
+## Programación orientada a objetos.
+
 
 
