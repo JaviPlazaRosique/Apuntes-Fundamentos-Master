@@ -1811,7 +1811,9 @@ Otro ejemplo pordría ser si tenemos una clase que son coches:
 
 La forma de definir una clase se debe de emplear el siguiente código:
 
-```{python }
-
+```{python eval=FALSE}
+class <Nombre de la clase>:
+  def __init__
 ```
 
+## Control de errores y excepciones (try/except)
