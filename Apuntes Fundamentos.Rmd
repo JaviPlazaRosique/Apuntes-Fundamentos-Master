@@ -1790,12 +1790,28 @@ input2 = "2.22"
 
 print(type(input2)) # Antes de cambiarlo.
 
-input2 = int(input2) 
+input2 = float(input2) 
 
-print(type(input)) # Después de cambiarlo.
+print(type(input2)) # Después de cambiarlo.
 ```
 
 ## Programación orientada a objetos.
 
+La programación oritendada a objetos (POO) es una forma de organizar el código imitando el mundo real: en lugar de tener funciones y variables sueltas, se crean clases que representan cosas (objetos) con sus propiedades (atributos) y comportamientos (métodos).
 
+Por ejemplo, si tenemos una clase que son perros:
+
+- Sus atributos podrían ser su raza, su color o incluso su edad. 
+- Sus métodos serían por ejemplo el ruido que hacen, o si son capaces de caminar o volar.
+
+Otro ejemplo pordría ser si tenemos una clase que son coches:
+
+- Sus atributos podrían ser su color, su marca o el tamaño de sus llantas.
+- Sus métodos podrían ser arrancar, frenar, etc.
+
+La forma de definir una clase se debe de emplear el siguiente código:
+
+```{python }
+
+```
 
