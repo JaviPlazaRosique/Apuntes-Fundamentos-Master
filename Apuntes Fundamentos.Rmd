@@ -1896,6 +1896,11 @@ print(coche2.bocina())
 
 La herencia es un mecanismo que permite a una clase, llamada subclase o clase hija, heredar las propiedades y métodos de otra clase, llamada superclase o clase padre. El emplerar las herencias permite reutilizar código y crear una jerarquía de clases lógicas. 
 
+Para poder crear una herencia, es decir, una clase hija a partir de una clase padre, se debe de emplear el siguiente código:
+
+```{python eval=FALSE}
+
+```
 
 
 ## Control de errores y excepciones (try/except)
