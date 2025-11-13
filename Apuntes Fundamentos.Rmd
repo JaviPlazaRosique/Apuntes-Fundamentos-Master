@@ -249,7 +249,7 @@ git add <Nombre del archivo>
 Ya sabiendo lo que es un commit, el comando que hará uno con los archivos que anteriormente se hayan añadido es el siguiente: 
 
 ```{bash eval=FALSE}
-git commit -m "Título del commit"
+git commit -m "<Título del commit>"
 
 # -m se pone para poner un mensaje, en este caso es el título del commit.
 ```
@@ -426,13 +426,13 @@ Una variable es un dato en forma de texto, de forma numérica u otro tipo, al qu
 Una variable se declarará del siguiente modo: 
 
 ```{python eval=FALSE}
-Nombre de la variable : Tipo de dato = Dato
+<Nombre de la variable> : <Tipo de dato> = <Dato>
 ```
 
 En Python, no es necesario asignar el tipo de dato, pues se asigna solo. Sin poner el tipo de dato, se escribiría del siguiente modo:
 
 ```{python eval=FALSE}
-Nombre de la variable = Dato
+<Nombre de la variable> = <Dato>
 ```
 
 Para poder nombrar variables se deben tener varías reglas en cuenta: 
@@ -577,7 +577,7 @@ Las cadenas de texto pueden contener letras, números, signos, etc. Estas se def
 Además se pueden introducir otras variables en una cadena de texto, para ello se puede usar la f, la cual se emplea de la siguiente manera:
 
 ```{python eval=FALSE}
-f"......{<Aqui se pone el nombre de la variable>.........}"
+f"...........{<Aqui se pone el nombre de la variable>}................"
 ```
 
 Por ejemplo, aquí tienes el resultado de emplear la f para juntar una cadena de texto con cualquier otra variable. 
@@ -603,7 +603,7 @@ print(type(texto2))
 Para poder sacar una letra o un rango de caracteres de un dato de tipo texto, se usa el siguiente comando:
 
 ```{python eval=FALSE}
-Nombre_de_la_variable[<Aquí se pone la posición o rango que queramos extraer>]
+<Nombre de la variable>[<Aquí se pone la posición o rango que queramos extraer>]
 
 # 0 es la primera posición,
 # Con -1 tendríamos la última posición.
@@ -623,7 +623,7 @@ print(texto[2:3])
 Además de extraer el caractér de la posición que queramos de una str, también podemos realizar otras opciones. A las funciones que realizan acciones sobre algún tipo de dato se llaman métodos. A continuación vendrán los métodos más empleados de los str, junto con una prueba de cada uno de ellos. 
 
 ```{python eval=FALSE}
-len(Nombre_de_la_variable) 
+len(<Nombre de la variable>) 
 
 # Dice la longitud del texto.
 ```
@@ -633,7 +633,7 @@ print(len(texto))
 ```
 
 ```{python eval=FALSE}
-Nombre_de_la_variable.upper()
+<Nombre de la variable>.upper()
 
 # Devuelve todo el texto en mayúsculas
 ```
@@ -643,7 +643,7 @@ print(texto.upper())
 ```
 
 ```{python eval=FALSE}
-Nombre_de_la_variable.lower()
+<Nombre de la variable>.lower()
 
 # Devuelve todo el texto en minusculas
 ```
@@ -653,7 +653,7 @@ print(texto.lower())
 ```
 
 ```{python eval=FALSE}
-Nombre_de_la_variable.capitalize()
+<Nombre de la variable>.capitalize()
 
 # Devuelve la primera letra del texto en mayúsculas
 ```
@@ -663,7 +663,7 @@ print(texto.capitalize())
 ```
 
 ```{python eval=FALSE}
-Nombre_de_la_variable.title()
+<Nombre de la variable>.title()
 
 # Devuelve en mayúsculas la primera letra de cada palabra
 ```
@@ -677,7 +677,7 @@ print(texto3.title())
 ```
 
 ```{python eval=FALSE}
-Nombre_de_la_variable.count("<argumento>")
+<Nombre de la variable>.count("<argumento>")
 
 # Devuelve cuantas veces se repite el argumento dentro del texto
 ```
@@ -687,7 +687,7 @@ print(texto3.count("o"))
 ```
 
 ```{python eval=FALSE}
-Nombre_de_la_variable.startswith("<argumento>")
+<Nombre de la variable>.startswith("<argumento>")
 
 # Devuelve True o False dependiendo de si el texto empieza con el argumento
 ```
@@ -697,7 +697,7 @@ print(texto3.startswith("estoy"))
 ```
 
 ```{python eval=FALSE}
-Nombre_de_la_variable.endswith("<argumento>")
+<Nombre de la variable>.endswith("<argumento>")
 
 # Devuelve True o False dependiendo de si el texto termina con el argumento
 ```
@@ -713,7 +713,7 @@ Las listas son colecciones ordenadas y modificables (mutables) de elementos. Las
 Las listas se definen de la siguiente manera:
 
 ```{python eval=FALSE}
-Nombre_de_la_lista = [<Elemento>, <Elemento>, <Elemento>, ...]
+<Nombre de la lista> = [<Elemento>, <Elemento>, <Elemento>, ...]
 ```
 
 Para comprobar que las listas se definen como anteriormente se ha comentado, se creará una. Así también se podrá emplear para probar sus métodos. 
@@ -731,16 +731,16 @@ Al igual que los str y todos los tipos de datos, existen métodos útiles para e
 Para comenzar, en las cadenas de texto se puede acceder al carácter, que se encuentra en la posición que queramos. Pues en las listas podemos acceder al elemento que se encuentre en la posición que queramos. Además si un elmento es de tipo texto, tambien podemos acceder al caracter que este en la posición que queramos la mismo tiempo. 
 
 ```{python eval=FALSE}
-Nombre_de_la_lista[<Posición>]
+<Nombre de la lista>[<Posición>]
 
 # Las posiciones funcionan igual que en las cadenas de texto
 
-Nombre_de_la_lista[<Posición en la lista>][<Posición en el texto>]
+<Nombre de la lista>[<Posición en la lista>][<Posición en el texto>]
 
 # Para hacer esto, el elemento de la lista debe ser de tipo str. Se puede saber 
 # de la siguiente manera.
 
-type(Nombre_de_la_lista[<Posición en la lista>])
+type(<Nombre de la lista>[<Posición en la lista>])
 ```
 
 ```{python}
@@ -756,7 +756,7 @@ print(lista[1][0])
 A continuación estarán los demás métodos, sin estar todos, puesto que existen muchos. En el caso de querer saber más, hay que recurrir a la documentación.
 
 ```{python eval=FALSE}
-Nombre_de_la_lista.append(<Elemento>)
+<Nombre de la lista>.append(<Elemento>)
 
 # Añade el elemento al final de la lista
 ```
@@ -768,7 +768,7 @@ print(lista)
 ```
 
 ```{python eval=FALSE}
-Nombre_de_la_lista.insert(<Posición>, <Elemento>)
+<Nombre de la lista>.insert(<Posición>, <Elemento>)
 
 # Añade el elemento en la posición que queramos. Si la posición es central, 
 # Los elementos que vayan después, se desplazarán una posición.
@@ -781,7 +781,7 @@ print(lista)
 ```
 
 ```{python eval=FALSE}
-Nombre_de_la_lista.remove(<Elemento>)
+<Nombre de la lista>.remove(<Elemento>)
 
 # Elimina el elemento de la lista con ese nombre
 ```
@@ -793,7 +793,7 @@ print(lista)
 ```
 
 ```{python eval=FALSE}
-Nombre_de_la_lista.pop(<Posición>)
+<Nombre de la lista>.pop(<Posición>)
 
 # Elimina el elemento de la lista que se encuentre en esa posición
 
@@ -813,7 +813,7 @@ print(lista)
 ```
 
 ```{python eval=FALSE}
-len(Nombre_de_la_lista)
+len(<Nombre de la lista>)
 
 # Cuenta el número de elementos dentro de una lista.
 ```
@@ -829,7 +829,7 @@ Las tuplas son como las listas, pero cuyo contenido no se puede modificar (es in
 Las tuplas se definen de manera similar a las listas, lo único que cambia es que en la lista se emplean [], y en las tuplas (). Se definirían del siguiente modo:
 
 ```{python eval=FALSE}
-Nombre_de_la_tupla = (<Elemento>, <Elemento>, <Elemento>, ...)
+<Nombre de la tupla> = (<Elemento>, <Elemento>, <Elemento>, ...)
 ```
 
 Para comprobar que las tuplas se definen como se ha comentado, se generará una tupla. Y además se podrá emplear para probar sus métodos.
@@ -847,7 +847,7 @@ En el caso de las tuplas, al ser inmutables, no existen métodos que las modifiq
 La forma de acceder a cualquier elemento de la tupla es la misma forma que en las listas. 
 
 ```{python eval=FALSE}
-Nombre_de_la_tupla.count(<Elemento>)
+<Nombre de la tupla>.count(<Elemento>)
 
 # Devuelve el número de elementos que coincide con el elemento introducido.
 ```
@@ -857,7 +857,7 @@ print(tupla.count(1))
 ```
 
 ```{python eval=FALSE}
-len(Nombre_de_la_tupla)
+len(<Nombre de la tupla>)
 
 # Devuelve el número de elementos que hay en la lista
 ```
@@ -873,7 +873,7 @@ tuplaNumerica = (1, 2, 3, 4, 5)
 ```
 
 ```{python eval=FALSE}
-max(Nombre_de_la_tupla)
+max(<Nombre de la tupla>)
 
 # Devuelve el número más alto que se encuentre dento de la tupla.
 ```
@@ -883,7 +883,7 @@ print(max(tuplaNumerica))
 ```
 
 ```{python eval=FALSE}
-sum(Nombre_de_la_tupla)
+sum(<Nombre de la tupla>)
 
 # Devuelve la suma de todos los elemntos del interior de la tupla.
 ```
@@ -893,7 +893,7 @@ print(sum(tuplaNumerica))
 ```
 
 ```{python eval=FALSE}
-sorted(Nombre_de_la_tupla)
+sorted(<Nombre de la tupla>)
 
 # Devuelve la tupla de manera ordenada, esta opcion tambien existe en las listas,
 # y se pueden ordenar siguiendo alguna norma. Su funcionamiento general es:
@@ -929,13 +929,13 @@ Tanto los conjuntos mutables como los inmutables, son similares al funcionamient
 La manera de definir los conjuntos mutables es la siguiente:
 
 ```{python eval=FALSE}
-Nombre_del_conjunto_mutable = [<Elemento>, <Elemento>, <Elemento>, ...]
+<Nombre del conjunto mutable> = [<Elemento>, <Elemento>, <Elemento>, ...]
 
-Nombre_del_conjunto_mutable = set(Nombre_del_cojunto_mutable)
+<Nombre del conjunto mutable> = set(Nombre_del_cojunto_mutable)
 
 # Tambiém se puede hacer sin generar una lista anteriormente
 
-Nombre_del_conjunto_mutable = set([<Elemento>, <Elemento>, <Elemento>, ...])
+<Nombre del conjunto mutable> = set([<Elemento>, <Elemento>, <Elemento>, ...])
 ```
 
 Para comprobar que es así, se genera un conjunto mutable. Teniendo en cuenta que los métodos de las listas son los mismos que el de los conjuntos mutables, no se probará ninguno, pues el funcionamiento es el mismo.
@@ -955,13 +955,13 @@ print(type(conjuntoMutable))
 La manera de definir los conjuntos mutables es la siguiente:
 
 ```{python eval=FALSE}
-Nombre_del_conjunto_inmutable = [<Elemento>, <Elemento>, <Elemento>, ...]
+<Nombre del conjunto inmutable> = [<Elemento>, <Elemento>, <Elemento>, ...]
 
-Nombre_del_conjunto_inmutable = frozenset(Nombre_del_cojunto_inmutable)
+<Nombre del conjunto inmutable> = frozenset(Nombre_del_cojunto_inmutable)
 
 # Tambiém se puede hacer sin generar una lista anteriormente
 
-Nombre_del_conjunto_inmutable = frozenset([<Elemento>, <Elemento>, <Elemento>, ...])
+<Nombre del conjunto inmutable> = frozenset([<Elemento>, <Elemento>, <Elemento>, ...])
 ```
 
 Para comprobar que es así, se genera un conjunto inmutable. Teniendo en cuenta que los métodos de las tuplas son los mismos que el de los conjuntos inmutables, no se probará ninguno, pues el funcionamiento es el mismo.
@@ -985,7 +985,7 @@ Los diccionarios son colecciones de pares **clave:valor**. Los pares clave:valor
 Los diccionarios se definen del siguiente modo:
 
 ```{python eval=FALSE}
-Nombre_del_diccionario = {<clave>:<valor>, <clave>:<valor>, ...}
+<Nombre del diccionario> = {<clave>:<valor>, <clave>:<valor>, ...}
 ```
 
 A modo de prueba, para comprobar como se generan los diccionarios y además poder así probar los métodos de los diccionarios con ejemplos.
@@ -1015,7 +1015,7 @@ for clave, valor in diccionario.items():
 Para poder acceder a cualquier valor que se encuentre dentro del diccionario, se debe emplear el siguiente comando:
 
 ```{python eval=FALSE}
-Nombre_del_diccionario[<clave>]
+<Nombre del diccionario>[<clave>]
 ```
 
 ```{python}
@@ -1025,7 +1025,7 @@ print(diccionario["colores_favoritos"])
 Al igual que todos los tipos de datos, los diccionarios tienen sus métodos. Algunos de los métodos más utilizados con los diccionarios son los que estarán a continución. 
 
 ```{python eval=FALSE}
-Nombre_del_diccionario.clear()
+<Nombre del diccionario>.clear()
 
 # Elimiina todos los elementos del diccionario
 ```
@@ -1057,7 +1057,7 @@ diccionario = {
 ```
 
 ```{python eval=FALSE}
-Nombre_del_diccionario.item()
+<Nombre del diccionario>.item()
 
 # Devuelve la clave:valor de todo el diccionario en forma de tupla.
 
@@ -1065,7 +1065,7 @@ Nombre_del_diccionario.item()
 ```
 
 ```{python eval=FALSE}
-Nombre_del_diccionario.get(<clave>)
+<Nombre del diccionario>.get(<clave>)
 
 # Devuelve el valor que corresponde a la clave escrita.
 ```
@@ -1075,7 +1075,7 @@ print(diccionario.get("nombre"))
 ```
 
 ```{python eval=FALSE}
-Nombre_del_diccionario.keys()
+<Nombre del diccionario>.keys()
 
 # Devuelve todas las claves del diccionario.
 ```
@@ -1086,7 +1086,7 @@ for clave in diccionario.keys():
 ```
 
 ```{python eval=FALSE}
-Nombre_del_diccionario.values()
+<Nombre del diccionario>.values()
 
 # Devuelve todos los valores del diccionario.
 ```
@@ -1097,11 +1097,11 @@ for valor in diccionario.values():
 ```
 
 ```{python eval=FALSE}
-Nombre_del_diccionario.pop(<clave>)
+<Nombre del diccionario>.pop(<clave>)
 
 # Elimina la calve y su valor asignado. También serviría:
 
-del Nombre_del_diccionario[<clave>]
+del <Nombre del diccionario>[<clave>]
 ```
 
 ```{python}
@@ -1114,7 +1114,7 @@ for clave, valor in diccionario.items():
 ```
 
 ```{python eval=FALSE}
-Nombre_del_diccionario[<clave>] = <valor>
+<Nombre del diccionario>[<clave>] = <valor>
 
 # Crea una nueva clave con su valor asignado.
 ```
@@ -1133,7 +1133,7 @@ Los datos de tipo booleano, son de tipo lógico y expresan True o False, en func
 La definición de una variable de este tipo se hará del siguiente modo:
 
 ```{python eval=FALSE}
-Nombre_de_la_variable_booleana = True o False
+<Nombre de la variable booleana> = True o False
 ```
 
 Para comprobarlo, se crea una variable de tipo booleano. 
@@ -1742,7 +1742,7 @@ mezcla(1, 2, 3, 4, nombre="Ana", edad=30, ciudad="Murcia")
 Las funciones lamda son funciones sencillas que se escriben en una única línea. Este tipo de funciones se emplean para funciones sencillas, puesto que tendríamos la restricción de escritura de una línea. Las funciones lambda se definen de la siguiente manera:
 
 ```{python eval=FALSE}
-Nombre_de_la_función = lambda <parámetros>: <expresión>
+<Nombre de la función> = lambda <parámetros>: <expresión>
 ```
 
 Para probar como funciona, se realizan varios ejemplos.
@@ -1762,7 +1762,7 @@ print(textoMayusculas("Lucas"))
 La función input() permite pedirle un dato a un usuario por consola. La forma de emplear esta función es la siguiente:
 
 ```{python eval=FALSE}
-Nombre_de_la_variable_introducida = input("<mensaje que se muestra en consola>")
+<Nombre de la variable introducida> = input("<mensaje que se muestra en consola>")
 ```
 
 Como este tipo de documento no permite interactuar, no se puede probar. 
@@ -1770,9 +1770,9 @@ Como este tipo de documento no permite interactuar, no se puede probar.
 El principal problema que tiene esta función es que todos los datos que se introducen por consola vienen con tipo str. Para poder cambiar de tipo str a otro, se puede emplear el siguiente método: 
 
 ```{python eval=FALSE}
-int(<Nombre_de_la_variable_introducida>) # Si el número es entero
+int(<Nombre de la variable introducida>) # Si el número es entero
 
-float(<Nombre_de_la_variable_introducida>) # Si el número tiene decimales
+float(<Nombre de la variable introducida>) # Si el número tiene decimales
 ```
 
 Para poder probar estos cambios, como no se puede hacer con input, se hará con unas variables inventadas que sean de tipo str.
@@ -1809,11 +1809,31 @@ Otro ejemplo pordría ser si tenemos una clase que son coches:
 - Sus atributos podrían ser su color, su marca o el tamaño de sus llantas.
 - Sus métodos podrían ser arrancar, frenar, etc.
 
-La forma de definir una clase se debe de emplear el siguiente código:
+Una clase es un molde para crear objetos. Para poder crear una, se debe de emplear el siguiente código:
 
 ```{python eval=FALSE}
-class <Nombre de la clase>:
-  def __init__
+class <Nombre de la clase>: 
+  # El nombre de la clase debe de empezar en mayúsculas, por convención.
+  
+  def __init__(self, <atributo 1>, <atributo 2>, <atributo 3>): 
+    # __init__ se ejecutará automáticamente cuando se creen nuevos objetos, y
+    # se usa para inicializar sus atributos (únicamente los que tienen un valor 
+    # asignado en la creación de la clase).
+    
+    # self representa al objeto que se esta creando dentro de la clase.
+    
+    self.<atributo 1> = <atributo 1>
+    self.<atributo 2> = <atributo 2>
+    self.<atributo 3> = <valor>
+    
+    # A los atributos que se les ha asignado el mismo nombre que el del atributo,
+    # tendrán parámetros que le asignemos nosotros a la hora de crear el objeto.
+    
+    # El atributo que tiene asignado un valor, se guardará en __init__, y este
+    # será el mismo parámetro para todos los objetos de esta clase.
+    
+  def <Nombre de la función>(self):
+    <Código que se ejecutará cuando el objeto utilice este método>
 ```
 
 ## Control de errores y excepciones (try/except)
