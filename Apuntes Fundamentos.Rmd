@@ -1815,16 +1815,16 @@ Una clase es un molde para crear objetos. Para poder crear una, se debe de emple
 class <Nombre de la clase>: 
   # El nombre de la clase debe de empezar en mayúsculas, por convención.
   
-  def __init__(self, <atributo 1>, <atributo 2>, <atributo 3>): 
+  def __init__(self, <Atributo 1>, <Atributo 2>, <Atributo 3> = <Valor>): 
     # __init__ se ejecutará automáticamente cuando se creen nuevos objetos, y
     # se usa para inicializar sus atributos (únicamente los que tienen un valor 
     # asignado en la creación de la clase).
     
     # self representa al objeto que se esta creando dentro de la clase.
     
-    self.<atributo 1> = <atributo 1>
-    self.<atributo 2> = <atributo 2>
-    self.<atributo 3> = <valor>
+    self.<Atributo 1> = <Atributo 1>
+    self.<Atributo 2> = <Atributo 2>
+    self.<Atributo 3> = <Atributo 3>
     
     # A los atributos que se les ha asignado el mismo nombre que el del atributo,
     # tendrán parámetros que le asignemos nosotros a la hora de crear el objeto.
@@ -1836,6 +1836,66 @@ class <Nombre de la clase>:
     <Código que se ejecutará cuando el objeto utilice este método>
 ```
 
-Un ejemplo de definición de clase puede ser el siguiente. Donde voy a crear la clase de coches, que tendrá como atributos el color y si es gasolina o diesel. Además tendrá como metodo arrancar y tocar la bocina. 
+Un ejemplo de definición de clase puede ser el siguiente. Donde voy a crear la clase de coches, que tendrá como atributos el color, si es gasolina o diesel, y se va a suponer que todos los coches tienen el mismo precio (1000€). Además tendrá como metodo arrancar y tocar la bocina. 
+
+```{python}
+class Coches:
+  def __init__(self, color, carburante, precio = 1000):
+    self.color = color
+    self.carburante = carburante
+    self.precio = precio
+  
+  def arrancar(self):
+    return "El coche ha arrancado (brummmm!!!)"
+  
+  def bocina(self):
+    return "PI PIIIII"
+``` 
+
+Una vez creada la clase, se pueden crear objetos que permanezcan a esta clase de objetos, para ello se debe de emplear el siguiente código:
+
+```{python eval=FALSE}
+<Nombre del objeto> = <Nombre de la clase>(<Atributo 1>, <Atributo 2>)
+
+# Los atributos que se ponen, son los que no tienen un valor asignado previamente.
+```
+
+Para comprobar esto, y para poder probar los métodos y luego más adelante las herencias, se van a crear varios objetos dentro de la clase, es decir, se van a crear varios coches.
+
+```{python}
+coche1 = Coches("azul", "gasolina")
+
+coche2 = Coches("negro", "diesel")
+
+coche3 = Coches("blanco", "gasolina")
+```
+
+Para poder acceder alguno de los atributos de algún objeto ya creado, y para activar sus métodos hay que emplear los siguientes códigos.
+
+```{python eval=FALSE}
+# Para extraer un atributo de un objeto: 
+
+<Nombre del objeto>.<Nombre del atributo que queremos extraer>
+
+# Si se prefiere también se puede crear un método que muestre toda la información.
+
+# Para emplear los métodos de un objeto:
+
+<Nombre del objeto>.<Método que se quiera emplear>()
+```
+
+Para probar esto, se mostrarán algunos de los atributos de los coches creados, y algunos emplearán sus métodos. 
+
+```{python}
+print(coche1.color)
+print(coche2.carburante)
+print(coche1.precio)
+print(coche1.arrancar())
+print(coche2.bocina())
+```
+
+La herencia es un mecanismo que permite a una clase, llamada subclase o clase hija, heredar las propiedades y métodos de otra clase, llamada superclase o clase padre. El emplerar las herencias permite reutilizar código y crear una jerarquía de clases lógicas. 
+
+
 
 ## Control de errores y excepciones (try/except)
