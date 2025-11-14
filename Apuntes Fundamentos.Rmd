@@ -1899,8 +1899,221 @@ La herencia es un mecanismo que permite a una clase, llamada subclase o clase hi
 Para poder crear una herencia, es decir, una clase hija a partir de una clase padre, se debe de emplear el siguiente código:
 
 ```{python eval=FALSE}
+# Si queremos que herede por defecto todos loa métodos y atributos:
 
+class <Nombre de la clase hija>(<Nombre de la clase padre>):
+  pass
+
+# Si queremos se pueden reescribir sobre los métodos creados de la clase padre.
+# Y también se pueden introducir nuevos métodos en cada clase hija.
+# Sería del siguiente modo:
+
+class <Nombre de la clase hija>(<Nombre de la clase padre>):
+  
+  def <Nombre de la función de la clase padre>(self):
+    <Código que se ejecutará cuando el objeto utilice este método>
+    
+  def <Nombre de la función>(self):
+    <Código que se ejecutará cuando el objeto utilice este método>
+```
+
+De la manera que hemos visto anteriormente, hemos visto como todos los atributos se heredan, pero no hemos visto como una clase hija puede tener sus atributos propios además de los heredados de la clase padre. Esto se puede lograr gracias a la función super(), la cual se emplea del siguiente modo:
+
+```{python eval=FALSE}
+class <Nombre de la clase hija>(<Nombre de la clase padre>):
+  def __init__(self, <Atributo heredado>, <Atributo heredado>, <Atributo propio>):
+    super().__init__(<Atributo heredado>, <Atributo heredado>)
+    self.<Atributo propio> = <Atributo propio>
+```
+
+Para poder probar esto, se va a crear una clase hija (Marca), a partir de la clase padre (Coches). La clase hija heredará todos los métodos y atributos, y además tendrá como atributo propio el modelo, y un método propio que lo describa.
+
+```{python}
+class Marca(Coches):
+  def __init__(self, color, carburante, modelo, precio = 1000):
+
+# Modelo va antes al no tener un valor asignado
+
+    super().__init__(color, carburante, precio)
+    self.modelo = modelo
+    
+  def queClase(self):
+    print(f"Pertenezco a la clase {type(self).__name__}")
+```
+
+Una vez creada la clase hija, se crearán varios objetos dentro de esta clase para probar tanto como se crean como los métodos que tienen. 
+
+```{python}
+Hyundai = Marca("negro", "diesel", "i30 N")
+
+Kia = Marca("azul", "gasolina", "ceed")
+
+BMW = Marca("gris", "gasolina", "M3 Competition")
+```
+
+```{python}
+print(Hyundai.bocina())
+print(BMW.color)
+print(f"Soy un Kia {Kia.modelo}, que se mueve con {Kia.carburante}")
+Kia.queClase()
+```
+
+## Control de errores y excepciones (try/except)
+
+El control de errores y excepciones permite manejar situaciones inesperadas durante la ejecución de un programa sin que este se detenga abruptamente. En Python, se utiliza la estructura try-except para capturar y gestionar errores comunes, como entrada de datos inválida, operaciones matemáticas no permitidas o acceso a archivos inexistentes. Esta técnica mejora la robustez y usabilidad del código.
+
+El método de try-except se usa principalmente, cuando no te fias al 100% o bien de tu código o bien de que por ejemplo una API a la que le realizas una llamada, no este activa. 
+
+La forma de uso del try-except es el siguiente: 
+
+```{python eval=FALSE}
+try: 
+  <Código que no sabemos si funciona>
+except Exception as e:
+  <Código que se ejecutará en el caso de que salte un error en el primero>
+
+# Se pone Exception as e para saber que ha fallado al ejecutar el código. Para 
+# ver el error, solo habra que realizar un print(e) en la parte de except
+```
+
+Para que se entienda, en el código anterior, en palabras lo que hace el código es los siguiente:
+
+- Ejecuta este código.
+- Si falla haz esto (para que no se detenga la ejecución del programa)
+
+Un ejemplo de un código que se ejecuta sin errores y otro que falla podrían ser los siguientes.
+
+```{python}
+# Código que falla en su ejecución inicial.
+
+try: 
+  operación = 10 / 0
+  print(operación)
+except Exception as e:
+  print("Ha ocurrido un error!!!", e)
+  
+# Código que no falla en su ejecución inicial.
+
+try: 
+  operación = 10 / 5
+  print(operación)
+except Exception as e:
+  print("Ha ocurrido un error!!!", e)
+```
+
+## Módulos.
+
+Los módulos en Python son archivos de código que contienen definiciones de funciones, clases y variables. Son archivos con extensión .py. Y pueden ser de creación propia o de creación ajena.
+
+Existen diferentes maneras de poder implementar un módulo dentro del código. Las maneras son las siguientes:
+
+```{python eval=FALSE}
+# Forma 1.
+
+import <Nombre del módulo>
+
+# Forma 2.
+
+import <Nombre del módulo> as <Alias que se le quiere asignar al módulo>
+# Normalmente el alias se pone por convención como por ejemplo: 
+# pandas ----> pd
+# numpy ----> np
+# matplotlib ----> plt
+
+# Forma 3.
+
+from <nombre del módulo> import <Función que se quiere importar>
+
+# Forma 4. (No recomendada)
+
+from <nombre del módulo> import * # Importa todas las funciones
+```
+
+Con cada método de importación de los módulos hay una forma específica de emplear las funciones que se encuentran en su interior. La forma de llamar a las funciones según el método de impotación son las siguientes:
+
+```{python eval=FALSE}
+# Forma 1.
+
+<Nombre del módulo>.<Nombre de la función>()
+
+# Forma 2.
+
+<Alias del módulo>.<Nombre de la función>()
+
+# Forma 3.
+
+<Nombre de la función importada>()
+
+# Forma 4. 
+
+<Nombre de la función>()
+```
+
+Para mostrar como se importa un módulo, se empleará un módulo creado por mi (miModulo.py). Donde dentro únicamente se encuentran tres funciones matemáticas simples.
+
+```{python}
+import miModulo 
+
+miModulo.sumar(2,5)
+miModulo.restar(1,1)
+miModulo.multiplicar(9,9)
+```
+
+Así es como se emplean los módulos propios. Para poder ver como se realiza con módulos de ajenos, en el siguiente apartado se empleará uno.
+
+### LLamada a una API con requests.
+
+Una API (Interfaz de Programación de Aplicaciones) es un conjunto de reglas, protocolos y herramientas que permiten que diferentes aplicaciones o sistemas de software se comuniquen entre sí, definiendo cómo se pueden hacer solicitudes, qué datos se pueden intercambiar y en qué formato, facilitando la integración y el uso de funcionalidades externas sin necesidad de conocer los detalles internos de su implementación.
+
+Para que se entienda, una API es como un camarero en un restaurante: 
+
+- Tú eres el cliente (programa de Python).
+- La cocina es el sistema que tiene la información o realiza la acción (base de datos).
+- El menú es lo que puedes pedir (las funciones que ofrece la API).
+- El camarero (la API) toma tu pedido, lo lleva a la cocina, y trae de vuelta lo que pediste.
+
+Para realizar una llamada a una API desde Python, se usa el módulo requests. Para emplearlo, lo primero que se debe realizar es importarlo.
+
+```{python}
+try:
+  import requests
+  print("Se ha importado el módulo correctamente")
+except Exception as e:
+  print("Error!!!", e)
+  
+help(requests) # Muestra informacíón sobre el módulo que queramos.
+```
+
+A la API que se le va a realizar la llamada para probar es la siguiente: https://randomuser.me/api/.
+
+```{python}
+respuesta = requests.get("https://randomuser.me/api/")
+
+print(respuesta)
+
+# Para transformar la respuesta a un JSON que se pueda leer se emplea la 
+# siguiente función:
+
+datos = respuesta.json() 
+
+print(datos)
+
+# Como vienen muchas personas, se muestra unicamente el nombre y el apellido de 
+# una de la siguiente forma:
+
+print(datos['results'][0]['name'])
 ```
 
 
-## Control de errores y excepciones (try/except)
+
+
+
+
+
+
+
+
+
+
+
+
