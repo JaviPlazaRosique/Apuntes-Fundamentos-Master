@@ -19,6 +19,15 @@ knitr::opts_chunk$set(
 )
 ```
 
+```{r echo=FALSE}
+library(DiagrammeR)
+library(DiagrammeRsvg)
+library(rsvg)
+library(kableExtra)
+library(DBI)
+library(RSQLite)
+```
+
 \newpage
 
 # Introducción.
@@ -76,10 +85,6 @@ La acción **Push** envia los commits que se encuentran en el repositorio local 
 A continuación se encuentra una imagen, que refleja el flujo de trabajo con Git, con lo explicado anteriormente. 
 
 ```{r echo=FALSE}
-library(DiagrammeR)
-library(DiagrammeRsvg)
-library(rsvg)
-
 funcionamientoGit <- "digraph {
   rankdir = TB
   graph [ranksep=1, nodesep=1, splines=true]
@@ -462,8 +467,6 @@ for palabraReservada in keyword.kwlist:
 En Python existen diferentes tipos de datos, los cuales están recogidos en la siguiente tabla. 
 
 ```{r echo=FALSE}
-library(kableExtra)
-
 tipos_python <- data.frame(
   Categoría = c(
     "Numérico", "", "",
@@ -2104,6 +2107,25 @@ print(datos)
 print(datos['results'][0]['name'])
 ```
 
+\newpage
+
+# SQL
+
+SQL (Structured Query Language) es un lenguaje de programación que se utiliza para comunicarse con bases de datos relacionales. Sirve para guardar, buscar, actualizar o eliminar información de forma sencilla y rápida. Es como un traductor entre las personas y la base de datos. 
+
+Una base de dato relacional es un tipo de base de datos que organiza la información en tablas, como si fueran hojas de cáculo. Cada tabla contine filas y columnas. Donde las filas son registros y las columnas los campos o atributos. Lo que hace relacinal a una base de datos, es que las tablas se pueden conectar entre sí. 
+
+Existen muchos tipos de bases de datos SQL, como pueden ser:
+
+- PostgreSQL.
+- MariaDB.
+- Microsoft SQL Server.
+- MySQL.
+- ect...
+
+Pero la mayoría de ellas son muy parecidas y la lógica es la misma. Por lo que aprendiendo SQL en cualquiera de ellas se va a poder trabajar en cualquiera.
+
+Para poder prácticar con SQL, y comprobar que los códigos funcionan, se va a trabajar con una base de datos SQLite. Se trabajará con esta, por la sencillez de conexión al no estar conectada a un servidor. Esta base de datos se ejecuta temporalmente en la memoria RAM del dispositivo.
 
 
 
