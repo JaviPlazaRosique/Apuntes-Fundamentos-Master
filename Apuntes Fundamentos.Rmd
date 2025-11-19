@@ -2226,21 +2226,68 @@ CREATE TABLE IF NOT EXISTS empleados (
 
 Para comprobar que se ha creado, y ver al mismo tiempo el esquema de la tabla, se muestra a continuación el "Schema" de la tabla. 
 
-```{sql connection=con, echo=FALSE}
+```{sql connection=con, echo=FALSE, tab.cap=NA}
 PRAGMA table_info(empleados);
 ```
 
+Para que se entienda el Schema, las partes del mismo son las siguientes:
 
+- **cid** $\longrightarrow$ Es el orden por el que aparecen las columnas, empezando por 0.
+- **name** $\longrightarrow$ Es el nombre real de la columna.
+- **type** $\longrightarrow$ Es el tipo que se ha declarado para la columna.
+- **notnull** $\longrightarrow$ Indica cuando la columna acepta una casilla vacia (NULL), significando el 0 que se permiten valores nulos y 1 que no se permiten. Por defecto es 0.
+- **dflt_value** $\longrightarrow$ Si no se especifica el valor que va en la casilla, ira lo que aparezca en este apartado. 
+- **pk** $\longrightarrow$ Es si la columna es una primary key o no. Cuando es 0, la columna no es una primary key, y si es 1 es que es la primary key. Si hay dos o más, se numerarán por orden (1, 2, ...).
 
+Además de crear una tabla, también se puede tanto eliminar como vaciar. Para poder vaciar una tabla, se debe de ejecutar la siguiente query:
 
+```{sql connection=con, eval=FALSE}
+DROP TABLE <nombre de la tabla>;
+```
 
+Mientras que para vaciar una tabla, se debe de realizar la siguiente query: 
 
+```{sql connection=con, eval=FALSE}
+TRUNCATE <nombre de la tabla>;
+```
 
+Una vez creada una tabla, no tiene porque tener siempre la misma estructura. Es decir que se pueden añadir tanto columnas nuevas a la tabla, como eliminarlas. Para añadir una nueva columna, se debe de realizar la siguiente query: 
 
+```{sql connection=con, eval=FALSE}
+ALTER TABLE <nombre de la tabla> ADD COLUMN <nombre de la columna> <tipo de dato>;
+```
 
+Mientras que para poder eliminar una columna, se debe cambiar ADD por DROP, y no será necesario espeficar el tipo de dato. La query a realizar se quedaría del siguiente modo:
 
+```{sql connection=con, eval=FALSE}
+ALTER TABLE <nombre de la tabla> DROP COLUMN <nombre de la columna>;
+```
 
+Para poder probar esto, se van a añadir varias columnas nuevas a la tabla de empleados, y al mismo tiempo una de las nuevas columnas que se creen, se eliminará. Para comprobar que se vaya eliminando o creando, se visualizará el Schema, después de añadir las columnas y también después de eliminar la columna. 
 
+```{sql connection=con}
+ALTER TABLE empleados ADD COLUMN titulo VARCHAR(20);
+```
+
+```{sql connection=con}
+ALTER TABLE empleados ADD COLUMN experiencia INTEGER;
+```
+
+```{sql connection=con}
+ALTER TABLE empleados ADD COLUMN columnaInutil TEXT;
+```
+
+```{sql connection=con, echo=FALSE, tab.cap=NA}
+PRAGMA table_info(empleados);
+```
+
+```{sql connection=con}
+ALTER TABLE empleados DROP COLUMN columnaInutil;
+```
+
+```{sql connection=con, echo=FALSE, tab.cap=NA}
+PRAGMA table_info(empleados);
+```
 
 
 
