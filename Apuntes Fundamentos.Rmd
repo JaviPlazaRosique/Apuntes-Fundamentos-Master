@@ -2289,14 +2289,122 @@ ALTER TABLE empleados DROP COLUMN columnaInutil;
 PRAGMA table_info(empleados);
 ```
 
+## Introducción de datos (INSERT INTO). 
 
+Para poder introducir datos dentro de una tabla con SQL, se debe de emplear el comando INSERT INTO, el cual se empleará de la siguiente manera: 
 
+```{sql connection=con, eval=FALSE}
+INSERT INTO <nombre de la tabla> (<columna 1>, <columna 2>, <columna 3>)
+VALUES (<dato columna 1>, <dato columna 2>, <dato columna 3>),
+(<dato columna 1>, <dato columna 2>, <dato columna 3>),
+(<dato columna 1>, <dato columna 2>, <dato columna 3>);
 
+-- Se pueden poner tantas columnas como columnas hayan en la tabla.
 
+-- Se pueden añadir todas las filas de datos que se quiera. 
+```
 
+Para probar esto, se añadiran 30 filas a la columna de empleados. No se mostrará la tabla, ya que eso se realizará en el siguiente apartado. 
 
+```{sql connection=con}
+INSERT INTO empleados (cumpleaños, nombre, apellido, salario, titulo, experiencia) 
+VALUES
+('1995-03-12', 'Carlos',    'Gómez',      25000.00, 'Junior',      1),
+('1992-07-25', 'Lucía',     'Martínez',   27500.50, 'Junior',      2),
+('1998-11-03', 'Javier',    'López',      22000.00, 'Junior',      0),
+('1990-01-18', 'María',     'Sánchez',    31000.75, 'Senior',      8),
+('1988-09-09', 'Alejandro', 'Rodríguez',  29000.00, 'SemiSenior',  5),
+('1996-05-30', 'Paula',     'Fernández',  23500.20, 'Junior',      1),
+('1993-12-21', 'Sergio',    'Ruiz',       26000.00, 'SemiSenior',  3),
+('1997-04-07', 'Elena',     'Navarro',    24500.90, 'Junior',      1),
+('1991-10-14', 'Miguel',    'Díaz',       33000.00, 'Senior',      7),
+('1989-02-02', 'Laura',     'Morales',    28000.00, 'SemiSenior',  4),
+('1994-06-19', 'Andrés',    'Torres',     25500.35, 'SemiSenior',  3),
+('1999-08-11', 'Natalia',   'Vargas',     21500.00, 'Junior',      0),
+('1987-03-28', 'Raúl',      'Castro',     34000.00, 'Senior',     10),
+('1995-09-05', 'Irene',     'Ortega',     26050.75, 'SemiSenior',  3),
+('1992-11-30', 'Hugo',      'Rubio',      27520.10, 'SemiSenior',  4),
+('1996-01-09', 'Claudia',   'Molina',     23000.00, 'Junior',      1),
+('1993-04-23', 'Adrián',    'Cortés',     24800.00, 'Junior',      2),
+('1990-12-17', 'Patricia',  'León',       30500.00, 'Senior',      7),
+('1997-07-02', 'Diego',     'Herrera',    23800.60, 'Junior',      1),
+('1988-05-15', 'Sara',      'Domínguez',  29500.00, 'SemiSenior',  5),
+('1994-09-27', 'Manuel',    'Gil',        25200.00, 'Junior',      2),
+('1991-03-03', 'Noelia',    'Iglesias',   26800.75, 'SemiSenior',  4),
+('1998-10-20', 'Iván',      'Santos',     22400.00, 'Junior',      0),
+('1989-06-08', 'Cristina',  'Vega',       29050.00, 'SemiSenior',  5),
+('1995-02-26', 'Álvaro',    'Campos',     24570.10, 'Junior',      2),
+('1992-08-13', 'Marta',     'Reyes',      27800.00, 'SemiSenior',  4),
+('1997-11-09', 'Rubén',     'Fuentes',    23300.20, 'Junior',      1),
+('1990-04-01', 'Beatriz',   'Lara',       31200.00, 'Senior',      8),
+('1996-12-29', 'Óscar',     'Pascual',    24100.00, 'Junior',      1),
+('1993-01-31', 'Ana',       'Cuenca',     26500.00, 'SemiSenior',  3);
 
+```
 
+## Consultas SELECT en SQL.
+
+Para poder ver los datos que hay dentro de una tabla, se debe de emplear el comando SELECT. Pero dicho comando se puede emplear varias salidas de datos diferentes. Como pueden ser las siguientes:
+
+- Todos los datos de la tabla. 
+- Datos de la tabla según una condición.
+- Datos de al tabla con las columnas con alias. 
+- Todos los datos de la tabla, pero con un límite.
+- etc...
+
+### Estructura básica y selección de columnas. 
+
+Para poder ver todos los datos de la tabla, se debe de realizar la siguiente query. Además se mostrarán la tabla de empleados. 
+
+```{sql connection=con, eval=FALSE}
+SELECT * FROM <nombre de la tabla>;
+```
+
+```{sql connection=con, tab.cap=NA, max.print = -1}
+SELECT * FROM empleados;
+```
+
+Mientras que para alguna columna en especifica de la tabla, se debe de realizar la siguiente query:
+
+```{sql connection=con, eval=FALSE}
+SELECT <columna>, <columna> FROM <nombre de la tabla>;
+```
+
+```{sql connection=con, tab.cap=NA, max.print = -1}
+SELECT nombre, apellido FROM empleados;
+```
+
+Además, no solo se pueden obtener las columnas de una tabla. Si no que también se pueden concatenar los contenidos de las columnas en una columna nueva (para ello, se empleara AS, explicado posteriormente). La query que se debe de realizar para poder concatenar dos columnas es la siguiente:
+
+```{sql connection=con, eval=FALSE}
+SELECT <columna> || ' ' || <columna> AS <nombre asignado a la columna> FROM <tabla>;
+```
+
+```{sql connection=con, tab.cap=NA, max.print = -1}
+SELECT nombre || ' ' || apellido AS nombre_apellido FROM empleados;
+```
+
+### Uso de alias (AS).
+
+### Eliminación de duplicados (DISTINC).
+
+### Ordenación de resultados (ORDER BY).
+
+### Filtros con WHERE.
+
+### Limitar la salida de datos (LIMIT).
+
+### Funciones de agregación. 
+
+### Agrupación de resultados (GROUP BY).
+
+### Filtros sobre grupos (HAVING).
+
+### Suconsultas.
+
+### Expresiónes comunes (CASE).
+
+### CTEs (Common Table Expressions) con WITH.
 
 
 
