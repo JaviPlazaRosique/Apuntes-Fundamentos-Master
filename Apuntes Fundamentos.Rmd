@@ -2125,7 +2125,125 @@ Existen muchos tipos de bases de datos SQL, como pueden ser:
 
 Pero la mayoría de ellas son muy parecidas y la lógica es la misma. Por lo que aprendiendo SQL en cualquiera de ellas se va a poder trabajar en cualquiera.
 
+Al emplear SQL, se debe de tener encuenta que todo el código que se escribe en lenguaje SQL, se debe de escribir en mayúsculas (por convención), mientras que el demás texto como el nombre de una tabla, se escribirá o bien en minúsculas o con alguna mayúscula si así lo queremos, pero no entero. Además también se tiene que tener en cuenta que cada query (consulta) se debe de acabar con un punto y coma (;).
+
 Para poder prácticar con SQL, y comprobar que los códigos funcionan, se va a trabajar con una base de datos SQLite. Se trabajará con esta, por la sencillez de conexión al no estar conectada a un servidor. Esta base de datos se ejecuta temporalmente en la memoria RAM del dispositivo.
+
+```{r echo=FALSE}
+con <- dbConnect(RSQLite::SQLite(), ":memory:") # Se crea la base de datos en 
+                                                # la memoria.
+```
+
+Para poder crear una base de datos se empleará el siguiente comando, siempre y cuando se haya establecido previamente una conexión con algún tipo de base de datos. 
+
+```{sql connection=con, eval=FALSE}
+CREATE DATABASE <nombre de la base de datos>;
+```
+
+Por lo contrario si queremos eliminarla, se deberá de emplear el siguiente comando: 
+
+```{sql connection=con, eval=FALSE}
+DROP DATABASE <nombre de la base de datos>;
+```
+
+## Tipos de datos. 
+
+Tal y como se ha comentado anteriormente, el lenguaje de comunicación con las bases de datos (SQL), no es el mismo en todas las bases de datos. Y por esto mismo no todas tienen los mismos tipos de datos. 
+
+En este apartado, se encontrarán los tipos de datos más utilizados a la hora de ultilizar bases de datos relacionales. 
+
+### Datos de tipo numérico.
+
+**INTEGER (o INT)** $\longrightarrow$ Es el más empleado para guardar números enteros. 
+
+**BIGINT** $\longrightarrow$ Se emplea para guardar numero enteros, tan elevados que no son soportados por INTEGER. Se emplea principalmente para las primary keys (más adelante se explican).
+
+**DECIMAL(p, s) o NUMERIC(p, s)** $\longrightarrow$ Sirven indistintamente para definir números con decimales, siendo la p el número máximo de dígitos que puede tener el número (incluyendo los decimales), y la s el número de decimales que puede tener el número. 
+
+**MONEY** $\longrightarrow$ Son datos de tipo monetario, donde se puede especificar la moneda al introducir los datos, pero no se guardará el simbolo de la moneda en la base de datos. Este tipo de dato tiene un máximo de 19 dígitos, y siempre se declara con 4 decimales, si no se ponen, se rellenarán con ceros. 
+
+### Datos de tipo booleano.
+
+En algunas bases de datos SQL, se emplea **BIT** como un tipo de dato booleano, el cual se especifica con 0 (falso) o 1 (verdadero). Mientras que en otras bases de datos, se emplea directamente **BOOLEAN**, el cual se puede definir como: TRUE, FALSE o UNKNOWN.
+
+### Datos de tipo texto. 
+
+**CHAR(n)** $\longrightarrow$ Sirve para guardar cadenas de texto con una cantidad n de caracteres, siendo estos fijos. 
+
+**VARCHAR(n)** $\longrightarrow$ Sirve para guardar cadenas de texto con una cantidad n de caracteres máximos.
+
+**TEXT** $\longrightarrow$ Sirve para guardar cadenas de texto de una longuitud indefinida. Es cada vez menos utilizado.
+
+Atodos los tipos de datos anteriores, si se les añade una **N**, se les permite introducir texto en formato Unicode, es decir, con cualquier tipo de caracterés de cualquier idioma. Se escibirían como **NCHAR(n)**, **NVARCHAR(n)** y **NTEXT**.
+
+### Datos de tipo fecha y hora. 
+
+**DATE** $\longrightarrow$ Almacena únicamente la fecha siguiendo el siguiente formato: YYYY-MM-DD (<año>-<mes>-<día>).
+
+**TIME** $\longrightarrow$ Almacena la hora en el siguiente formato: HH:MM:SS (<hora>-<minuto>-<segundo>).
+
+**TIMESTAMP** $\longrightarrow$ Almacena tanto la fecha como la hora, y es empleada principalmente para guardar la hora en la que se crea alguna fila. Se guardaría con el siguiete formato: YYYY-MM-DD HH:MM:SS.
+
+## Gestión de la estructura de una tabla. 
+
+Para crear una tabla en SQL, se debe de hacer de la siguente manera:
+
+```{sql connection=con, eval=FALSE}
+CREATE TABLE IF NOT EXISTS <nombre de la tabla> (
+  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
+  <nombre de la columna>  <tipo de dato>,
+  <nombre de la columna>  <tipo de dato>,
+  <nombre de la columna>  <tipo de dato>
+);
+
+-- Se pueden poner tantas columnas como se quiera. 
+
+-- El "IF NOT EXISTS" se pone para no crear tablas duplicadas.
+
+-- La columna id se pone siempre, y se genera automáticamente. Siendo esta la 
+-- primary key de la tabla. En algunas bases de datos se pone 
+-- INTEGER PRIMARY KEY AUTOINCREMENT.
+```
+
+El id o primary key, aunque se explicará más adelante con las relaciones entre tablas, es un número único por cada registro de la tabla. No pudiendose repetir ningún número en toda la tabla. 
+
+Para probar la creación de la tabla, se va a crear una tabla que represente a los empleados de una empresa cualquiera. 
+
+```{sql connection=con}
+CREATE TABLE IF NOT EXISTS empleados (
+  id INTEGER PRIMARY KEY AUTOINCREMENT, 
+  cumpleaños DATE,
+  nombre VARCHAR(20),
+  apellido VARCHAR(20),
+  contratacion TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  salario NUMERIC(10, 2)
+);
+
+-- NOT NULL DEFAULT CURRENT_TIMESTAMP significa que si no se introduce dato, se pondrá 
+-- automáticamente la fecha y hora de la introducción de la fila.
+-- En algunas distribuciones, se usa now() en vez de CURRENT_TIMESTAMP.
+```
+
+Para comprobar que se ha creado, y ver al mismo tiempo el esquema de la tabla, se muestra a continuación el "Schema" de la tabla. 
+
+```{sql connection=con, echo=FALSE}
+PRAGMA table_info(empleados);
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
