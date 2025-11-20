@@ -2679,9 +2679,78 @@ SELECT AVG(salario) FROM empleados;
 
 ### Agrupación de resultados (GROUP BY).
 
+**GROUP BY** sirve para agrupar filas que comparten un mismo valor en una o varias columnas.
+Una vez formados los grupos, permite aplicar funciones de agregación (COUNT, SUM, AVG, etc.) para obtener un resultado por cada grupo en lugar de por cada fila.
+
+Cuando ejecutas una consulta con GROUP BY, SQL realiza:
+
+- Busca valores repetidos en la(s) columna(s) indicada(s).
+- Agrupa todas las filas que comparten esos valores.
+- Aplica una función de agregación a cada grupo.  
+- Devuelve una fila por cada conjunto formado.
+
+Para poder hacer una query básica empleando GROUP BY, se tiene que hacer del siguiente modo:
+
+```{sql connection=con, eval=FALSE}
+SELECT ...la consulta... GROUP BY <columna por la que se quiera agregar>;
+
+-- Si se quiere, se puede agregar por más de una columna.
+```
+
+Con el fin de entender como funciona, se van a realizar algunas pruebas, empleando funciones de agregación para ver como sería también.
+
+```{sql connection=con, tab.cap=NA, max.print = -1}
+SELECT titulo FROM empleados GROUP BY titulo;
+```
+
+```{sql connection=con, tab.cap=NA, max.print = -1}
+SELECT titulo, AVG(salario) AS media_salario FROM empleados GROUP BY titulo;
+```
+
+```{sql connection=con, tab.cap=NA, max.print = -1}
+SELECT experiencia, max(salario) AS maximo_salario FROM empleados GROUP BY titulo;
+```
+
 ### Filtros sobre grupos (HAVING).
 
+**HAVING** es una cláusula que se utiliza para filtrar grupos completos, no filas individuales. Solo aparece en consultas que utilizan GROUP BY.
+
+La diferencia fundamental entre HAVING y WHERE es que WHERE filtra filas individuales antes de la agrupación o agregación, mientras que HAVING filtra grupos de filas después de que se ha aplicado GROUP BY y se han calculado funciones de agregación.
+
+Aunque el uso mas común de HAVING es junto con un GROUP BY, este se puede usar solo, tomando todas las filas como un grupo único. 
+
+La clausula HAVING se empleará en los siguiente casos: 
+
+- Filtrar grupos según el resultado de una agregación.
+- Devolver únicamente los grupos que cumplan una condición.
+- Restringir resultados después de agrupar.
+- Hacer estadísticas filtradas.
+
+La forma genérica de emplear HAVING es la siguiente: 
+
+```{sql connection=con, eval=FALSE}
+SELECT ...la consulta... HAVING <condición sobre la agregación>;
+```
+
+Para probar como funciona HAVING, se harán varias pruebas entre las cuales habrá alguna con GROUP BY para ver como interactuan.
+
+```{sql connection=con, tab.cap=NA, max.print = -1}
+SELECT COUNT(*) FROM empleados HAVING COUNT(*) > 20;
+```
+
+```{sql connection=con, tab.cap=NA, max.print = -1}
+SELECT titulo, AVG(experiencia) AS media_experiencia FROM empleados
+GROUP BY titulo HAVING AVG(experiencia) > 2;
+```
+
+```{sql connection=con, tab.cap=NA, max.print = -1}
+SELECT experiencia, AVG(salario) AS media_salario FROM empleados
+GROUP BY experiencia HAVING AVG(salario) > 25000;
+```
+
 ### Subconsultas.
+
+Una subconsulta es una consulta SQL que va dentro de otra consulta. Sirve para obtener valores, listas o tablas intermedias que la consulta principal necesita para filtrar, comparar, calcular o construir resultados más complejos. Se utiliza cuando una sola consulta no basta para resolver el problema.
 
 ### Expresiónes comunes (CASE).
 
