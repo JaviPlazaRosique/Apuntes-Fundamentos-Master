@@ -2584,7 +2584,98 @@ SELECT * FROM empleados WHERE experiencia IN (0, 1, 2) LIMIT 5;
 SELECT * FROM empleados WHERE experiencia NOT IN (0, 1, 2) LIMIT 5;
 ```
 
+#### Filtros por patrones de texto (LIKE o NOT LIKE)
+
+Los filtros por patrones de texto permiten buscar coincidencias parciales dentro de una cadena.
+Se utilizan con los operadores:
+
+- **LIKE** $\longrightarrow$ Busca coincidencias dentro de una cadena de texto.
+- **NOT LIKE** $\longrightarrow$ Excluye las coincidencias detro de una cadena de texto. 
+
+Son fundamentales cuando quieres seleccionar filas que coinciden con un determinado patrón, no con un valor exacto. El código que se empleará para emplear este filtro es el siguiente:
+
+```{sql connection=con, eval=FALSE}
+SELECT ...la consulta... WHERE <columna> LIKE <patrón de texto>;
+```
+
+En cuanto a la busqueda de patrones, existen dos métodos para la busqueda de los mismos dentro de cadenas de texto. Dichos métodos son:
+
+- **Método para cualquier secuencia de caracteres (%).** En este caso los caracteres a buscar se escribirán como a, pero se pueden poner tantos como se quiera.
+  - **%a** $\longrightarrow$ Termina en a. 
+  - **a%** $\longrightarrow$ Empieza por a. 
+  - **%a%** $\longrightarrow$ Contine la a. 
+  - **%** $\longrightarrow$ Cualquier coincidencia de texto. 
+- **Método para secuencas de caracteres fijos (**$\_$**).** En este caso también se empleará la a. Y cabe destacar que cada _ se corresponde con un caractér desconocido y se pueden poner tantos como se quiera.
+  - $\_a$ $\longrightarrow$ Termina en a y tiene dos caracteres.
+  - **a_** $\longrightarrow$ Empieza por a y tiene dos caracteres.
+  - **_a_** $\longrightarrow$ Contiene la a y tiene tres caracteres.
+  
+A continuación hay varios ejemplos de esto, para comprobar y entender la lógica detrás de los filtros por patrones de texto. 
+
+```{sql connection=con, tab.cap=NA, max.print = -1}
+SELECT * FROM empleados WHERE nombre LIKE '%a' LIMIT 5;
+```
+
+```{sql connection=con, tab.cap=NA, max.print = -1}
+SELECT * FROM empleados WHERE nombre LIKE 'C%' LIMIT 5;
+```
+
+```{sql connection=con, tab.cap=NA, max.print = -1}
+SELECT * FROM empleados WHERE nombre LIKE '%a%' LIMIT 5;
+```
+
+```{sql connection=con, tab.cap=NA, max.print = -1}
+SELECT * FROM empleados WHERE titulo LIKE '__ni__' LIMIT 5;
+```
+
+#### Comprobación de valores nulos (NULL o NOT NULL).
+
+En una tabla cuando una columna no tiene algún dato bien en alguna fila o bien en toda la columna, en ese espacio se coloca un NULL. Para poder saber si alguna columna tiene valores nulos, se debe de realizar la siguiente query:
+
+```{sql connection=con, eval=FALSE}
+SELECT ...la consulta... WHERE <columna> IS NULL;
+```
+
+Por lo contrario si queremos extraer únicamente los datos que no son nulos, se deberá de realizar la siguiente query: 
+
+```{sql connection=con, eval=FALSE}
+SELECT ...la consulta... WHERE <columna> IS NOT NULL;
+``` 
+
 ### Funciones de agregación. 
+
+Las funciones de agregación permiten resumir o calcular valores a partir de un conjunto de filas.
+En lugar de devolver filas individuales, devuelven un único resultado por grupo.
+
+Las funciones de agregación más comunes son las siguientes:
+
+- **COUNT(<columna> o *)** $\longrightarrow$ Permite contar filas o valores dentro de una columna. 
+- **SUM(<columna>)** $\longrightarrow$ Permite sumar valores.  
+- **MAX(<columna>)** $\longrightarrow$ Permite obtener el valor más elevado. 
+- **MIN(<columna>)** $\longrightarrow$ Permite obtener el valor menos elevado.
+- **AVG(<columna>)** $\longrightarrow$ Permite obtener la media aritmética de todos los valores. 
+
+A continuación se puede encontrar un ejemplo con cada función de agregación.
+
+```{sql connection=con, tab.cap=NA, max.print = -1}
+SELECT COUNT(*) FROM empleados;
+```
+
+```{sql connection=con, tab.cap=NA, max.print = -1}
+SELECT SUM(salario) FROM empleados;
+```
+
+```{sql connection=con, tab.cap=NA, max.print = -1}
+SELECT MAX(salario) FROM empleados;
+```
+
+```{sql connection=con, tab.cap=NA, max.print = -1}
+SELECT MIN(salario) FROM empleados;
+```
+
+```{sql connection=con, tab.cap=NA, max.print = -1}
+SELECT AVG(salario) FROM empleados;
+```
 
 ### Agrupación de resultados (GROUP BY).
 
