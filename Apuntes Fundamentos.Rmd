@@ -1271,9 +1271,9 @@ print(b > c)
 
 Los operadores lógicos se usan para combinar condiciones. Devolviendo un valor booleando dependiendo de los argumentos empleados. Los operadores lógicos son los siguientes: 
 
-- and $\longrightarrow$ Y $\longrightarrow$ Verdadero si las condiciones combinadas son verdaderas.
-- or $\longrightarrow$ O $\longrightarrow$ Verdader si una de las condiciones combinadas es verdadera.
-- not $\longrightarrow$ NO $\longrightarrow$ Invierte el valor lógico.
+- **and** $\longrightarrow$ Y $\longrightarrow$ Verdadero si las condiciones combinadas son verdaderas.
+- **or** $\longrightarrow$ O $\longrightarrow$ Verdader si una de las condiciones combinadas es verdadera.
+- **not** $\longrightarrow$ NO $\longrightarrow$ Invierte el valor lógico.
 
 Para comprobar el funcionamiento de los operadores lógicos, se emplearán una serie de variables que se van a crear a continuación. Como el funcionamiento de los operadores lógicos funcionan en conjunto con los operadores de comparación, solo se comprobarán con variables de tipo numérico.
 
@@ -1292,8 +1292,8 @@ print(not a < b)
 
 Los operadores de identidad comparan si dos objetos son el mismo, no solo si tienen el mismo valor. Devolviendo un valor booleano. Los operadores de identidad son los siguientes.
 
-- is $\longrightarrow$ Devuelve True si son el mismo objeto. La diferencia con el operador de comparación == es que no compara el valor, si tienen la misma referencia o no. 
-- is not $\longrightarrow$ Devuelve True si no son el mismo objeto. La diferencia con el operador de comparación != es que no compara el valor, si tienen la misma referencia o no. 
+- **is** $\longrightarrow$ Devuelve True si son el mismo objeto. La diferencia con el operador de comparación == es que no compara el valor, si tienen la misma referencia o no. 
+- **is not** $\longrightarrow$ Devuelve True si no son el mismo objeto. La diferencia con el operador de comparación != es que no compara el valor, si tienen la misma referencia o no. 
 
 Para comprobar esto, puesto que es algo abstracto, se realizarán varios ejemplos.
 
@@ -1311,8 +1311,8 @@ print(a is not b)
 
 Los operadores de pertenenecia comprueban si un elemento está dentro de una secuencia, ya sea un texto (str), una lista u otra secuencia, devolviendo un valor booleano dependiendo de cuales sean los argumentos empleados. Los tipos de operadores de pertenencia son los siguientes:
 
-- in $\longrightarrow$ Es verdadero cuano el elemento esta dentro del otro. 
-- not in $\longrightarrow$ Es verdadero cuando el elemento no esta dentro del otro. 
+- **in** $\longrightarrow$ Es verdadero cuano el elemento esta dentro del otro. 
+- **not in** $\longrightarrow$ Es verdadero cuando el elemento no esta dentro del otro. 
 
 Para comprobar su funcionamiento se crearán varios ejemplos de cada uno. 
 
@@ -2458,7 +2458,7 @@ SELECT * FROM empleados LIMIT 5 OFFSET 10;
 ORDER BY, sirve para ordenar la salida de los datos. Se pueden ordenar tanto por columnas que queremos que aparezcan como columnas que no. Para poder oedenar la tabla según una o varias columnas se puede hacer de forma ascendente (ASC, aparece por defecto) o descendente (DESC). Se empleará de la siguiente forma:
 
 ```{sql connection=con, eval=FALSE}
-SELECT ...la consulta... ORDER BY <columna> ASC o DESC LIMIT ....;
+SELECT ...la consulta... ORDER BY <columna> ASC o DESC;
 ```
 
 ```{sql connection=con, tab.cap=NA, max.print = -1}
@@ -2481,7 +2481,108 @@ Cuando el criterio de ordenación es sobre un dato de tipo numérico:
 SELECT * FROM empleados ORDER BY titulo DESC, salario ASC LIMIT 15;
 ```
 
-### Filtros.
+### Filtros con WHERE.
+
+Los filtros se definen en la cláusula WHERE y sirven para decirle a la base de datos qué filas quieres y cuáles no. Sin WHERE, la consulta devuelve todas las filas que cumplan el FROM. Con WHERE, solo las que cumplen la condición. El funcionamiento general de los filtros con WHERE es el siguiente: 
+
+```{sql connection=con, eval=FALSE}
+SELECT ...la consulta... WHERE <condición>;
+```
+
+Las condiciones que se pueden emplear con WHERE pueden ser:
+
+- Operadores de comparación.
+- Operadores lógicos.
+- Filtros por rangos. 
+- Filtros por listas de valores. 
+- Filtros por patrones de texto. 
+- Comprobación de valores nulos.
+
+#### Operaciónes de comparación.
+
+Los operaciones de coparación permiten comparar valores. Los operadores de comparación son los siguientes:
+
+- $=$ $\longrightarrow$ Igual que.
+- $!=$ o $<>$ $\longrightarrow$ Distinto de.
+- $>$ $\longrightarrow$ Mayor que.
+- $<$ $\longrightarrow$ Menor que.
+- $>=$ $\longrightarrow$ Mayor o igual que.
+- $<=$ $\longrightarrow$ Menor o igual que.
+
+Para probar algunos de estos operadores, aqui hay varios ejemplos. 
+
+```{sql connection=con, tab.cap=NA, max.print = -1}
+SELECT * FROM empleados WHERE nombre = 'Carlos' LIMIT 5;
+```
+
+```{sql connection=con, tab.cap=NA, max.print = -1}
+SELECT * FROM empleados WHERE titulo != 'Junior' LIMIT 5;
+```
+
+```{sql connection=con, tab.cap=NA, max.print = -1}
+SELECT * FROM empleados WHERE salario > 20000 LIMIT 5;
+```
+
+```{sql connection=con, tab.cap=NA, max.print = -1}
+SELECT * FROM empleados WHERE experiencia <= 1 LIMIT 5;
+```
+
+#### Operadores lógicos. 
+
+Los operadores lógicos se usan para combinar condiciones. Los operadores lógicos son los siguientes: 
+
+- **AND** $\longrightarrow$ Y $\longrightarrow$ Todas las condicines tienen que cumplirse
+- **OR** $\longrightarrow$ O $\longrightarrow$ Una de las condiciones debe de cumplirse.
+- **NOT** $\longrightarrow$ NO $\longrightarrow$ Niega una condición.
+
+Al emplear los operadores lógicos, al igual que puede pasar con los operadores de comparación, o incluso otros tipos de operadores, si no se cumple la condición la tabla puede tener una salida sin filas. 
+
+Para probar algunos de estos operadores, aqui hay varios ejemplos. 
+
+```{sql connection=con, tab.cap=NA, max.print = -1}
+SELECT * FROM empleados WHERE nombre = 'Carlos' AND titulo = 'Junior' LIMIT 5;
+```
+
+```{sql connection=con, tab.cap=NA, max.print = -1}
+SELECT * FROM empleados WHERE titulo != 'Junior' OR experiencia <3 LIMIT 5;
+```
+
+```{sql connection=con, tab.cap=NA, max.print = -1}
+SELECT * FROM empleados WHERE NOT salario > 20000 LIMIT 5;
+```
+
+#### Filtro por rangos (BETWEEN).
+
+Filtrar por rangos permite se leccionar las filas en las que se cumpla la condición de que los valores de una de las columnas se encuente en un rango, teniendo en cuenta a los extremos. Se empleará BETWEEN de la siguiente manera: 
+
+```{sql connection=con, eval=FALSE}
+SELECT ...la consulta... WHERE <columna> BETWEEN <valor> AND <valor>;
+```
+
+```{sql connection=con, tab.cap=NA, max.print = -1}
+SELECT * FROM empleados WHERE experiencia BETWEEN 0 AND 2 LIMIT 5;
+```
+
+#### Filtros por listas de valores (IN o NOT IN)
+
+Los filtros por listas de valores son como el filtro por rangos pero para datos de tipo texto. Pero no entre un rangom sino que se emplean listas de elementos. Aunque su uso sea principalmente para datos de tipo texto, también se puede emplear con datos numéricos. Los operadores de este tipo son: 
+
+- **IN** $\longrightarrow$ Apareceran las filas donde los valores de la columna que queramos tengan valores dentro de la lista.
+- **NOT IN** $\longrightarrow$ Apareceran las filas donde los valores de la columna que queramos no tengan valores dentro de la lista.
+
+El modo de uso de estos operadores es el siguiente:
+
+```{sql connection=con, eval=FALSE}
+SELECT ...la consulta... WHERE <columna> IN o NOT IN (<valor>, <valor>, <valor>);
+```
+
+```{sql connection=con, tab.cap=NA, max.print = -1}
+SELECT * FROM empleados WHERE experiencia IN (0, 1, 2) LIMIT 5;
+```
+
+```{sql connection=con, tab.cap=NA, max.print = -1}
+SELECT * FROM empleados WHERE experiencia NOT IN (0, 1, 2) LIMIT 5;
+```
 
 ### Funciones de agregación. 
 
@@ -2489,7 +2590,7 @@ SELECT * FROM empleados ORDER BY titulo DESC, salario ASC LIMIT 15;
 
 ### Filtros sobre grupos (HAVING).
 
-### Suconsultas.
+### Subconsultas.
 
 ### Expresiónes comunes (CASE).
 
