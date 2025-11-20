@@ -2381,18 +2381,107 @@ SELECT <columna> || ' ' || <columna> AS <nombre asignado a la columna> FROM <tab
 ```
 
 ```{sql connection=con, tab.cap=NA, max.print = -1}
-SELECT nombre || ' ' || apellido AS nombre_apellido FROM empleados;
+SELECT nombre || '' || apellido AS nombreCompleto FROM empleados;
 ```
 
 ### Uso de alias (AS).
 
-### Eliminación de duplicados (DISTINC).
+Tal y como se ha podido ver anteriormente, se pueden emplear alias para llamar a una colunma. Pero además también se le puede asignar una alias a una tabla, esto es util cuando se están trabajando con dos o mas tablas al mismo tiempo. 
+
+Para asignar un alias a una columna o varias, se debe hacer de la siguiente manera:
+
+```{sql connection=con, eval=FALSE}
+SELECT <columna> AS <alias>, <columna> AS <alias> FROM <tabla>;
+
+-- Se pueden asignar tantos alias como se quieran.
+```
+
+Como se ha comentado, se le pueden asignar alias a las tablas, esto se realizaría de la siguiente manera: 
+
+```{sql connection=con, eval=FALSE}
+SELECT <alias de la tabla>.<columna> FROM <tabla> AS <alias>;
+
+-- Lo que ocurre es que tenemos acceso a la columna de la tabla a la que se le 
+-- ha asignado un alias. 
+```
+
+### Eliminación de duplicados (DISTINCT).
+
+Para poder obtener los datos de una columna sin duplicados, es decir, que si un dato se repite solo aparecerá una vez, se debe de emplear el comando DISTINCT. El cual se empleará de la siguiente manera: 
+
+```{sql connection=con, eval=FALSE}
+SELECT DISTINCT <columna> FROM <tabla>;
+```
+
+```{sql connection=con, tab.cap=NA, max.print = -1}
+SELECT DISTINCT titulo FROM empleados;
+```
+
+Esta función puede llegar a ser útil para: 
+
+- Obtener valores únicos de una columna.
+- Eliminar duplicados en los resultados.
+- Contar cuántos valores distintos existen.
+- Listar combinaciones únicas de varias columnas.
+- Explorar la variedad o diversidad de datos en un conjunto.
+- Detectar duplicados en tablas importadas o sucias.
+- Agrupar rápidamente sin usar GROUP BY.
+- Simplificar análisis exploratorio de columnas con muchos repetidos.
+- Identificar categorías o clases distintas dentro de un campo.
+
+### Limitar la salida de datos (LIMIT).
+
+Para poder limitar la salida de los datos en una consulta, es decir, que salgan tantas filas como queremos, se emplea la el comando LIMIT. Para poner un límite a una consulta, se debe de hacer de la siguiente forma:
+
+```{sql connection=con, eval=FALSE}
+SELECT ...la consulta... LIMIT <número de filas>;
+```
+
+```{sql connection=con, tab.cap=NA, max.print = -1}
+SELECT * FROM empleados LIMIT 5;
+```
+
+Además de esto, con la limitación de las filas, también se pueden saltar las primeras filas empleando OFFSET. Se pueden saltar tantas filas como se quiera, y se realiza de la siguiente manera:
+
+```{sql connection=con, eval=FALSE}
+SELECT ...la consulta... LIMIT <número de filas> OFFSET <número de filas a saltar>;
+```
+
+```{sql connection=con, tab.cap=NA, max.print = -1}
+SELECT * FROM empleados LIMIT 5 OFFSET 10; 
+
+-- Sin el OFFSET debería de salir lo mismo que en la tabla anterior. 
+```
 
 ### Ordenación de resultados (ORDER BY).
 
-### Filtros con WHERE.
+ORDER BY, sirve para ordenar la salida de los datos. Se pueden ordenar tanto por columnas que queremos que aparezcan como columnas que no. Para poder oedenar la tabla según una o varias columnas se puede hacer de forma ascendente (ASC, aparece por defecto) o descendente (DESC). Se empleará de la siguiente forma:
 
-### Limitar la salida de datos (LIMIT).
+```{sql connection=con, eval=FALSE}
+SELECT ...la consulta... ORDER BY <columna> ASC o DESC LIMIT ....;
+```
+
+```{sql connection=con, tab.cap=NA, max.print = -1}
+SELECT * FROM empleados ORDER BY nombre ASC LIMIT 5;
+```
+
+Tal y como se ha comentado, se puede ordernar por varias columnas, siendo la preferencia por la primera que se escriba en la query. Es decir, que se recurrirá al segudo o consiguiente criterio de ordenación si se producen igualdades en el criterio anterior. 
+
+Cuando el criterio de ordenación es sobre un dato de tipo texto: 
+
+- **ASC** $\longrightarrow$ Alfabéticamente (A $\rightarrow$ Z).
+- **DESC** $\longrightarrow$ Alfabéticamente, pero al revés (Z $\rightarrow$ A).
+
+Cuando el criterio de ordenación es sobre un dato de tipo numérico: 
+
+- **ASC** $\longrightarrow$ De menor a mayor. 
+- **DESC** $\longrightarrow$ De mayor a menor. 
+
+```{sql connection=con, tab.cap=NA, max.print = -1}
+SELECT * FROM empleados ORDER BY titulo DESC, salario ASC LIMIT 15;
+```
+
+### Filtros.
 
 ### Funciones de agregación. 
 
